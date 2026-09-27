@@ -1,0 +1,5 @@
+8b9faeb7b81ba1a86d599740a82a575a534c2d92eb8679ca86c6c0b33287271b  2026-09/tesla-model-y-9638-chat-final/01-homefeed.png
+105fb9eda97d2eccd206360ff068558126fd956546f8a3ee692fe73bc3b6b7bd  2026-09/tesla-model-y-9638-chat-final/02-sales-ranking.png
+2014620ccc4908ce76b12ad9baee0fa64bb7931dd4e675737db7e15781f068c2  2026-09/tesla-model-y-9638-chat-final/03-price-position.png
+747e17aa370f9f1872eff8b3d078989ed94800c35b8891964b028b378b5d4d89  2026-09/tesla-model-y-9638-chat-final/04-certified-range.png
+4711699fc3fd19d0197d53cc6566ec8b680fd2b86e199a4bbc20c46aa8dd6709  2026-09/tesla-model-y-9638-chat-final/05-import-ev-share.png
