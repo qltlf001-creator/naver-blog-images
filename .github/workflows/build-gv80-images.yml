@@ -1,0 +1,33 @@
+name: Build GV80 blog images
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build_gv80_images.py'
+      - '.github/workflows/build-gv80-images.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+          python -m pip install --upgrade pip pillow
+      - name: Generate images
+        run: python scripts/build_gv80_images.py
+      - name: Commit generated images
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 2026-09/gv80-hybrid/*.jpg
+          if git diff --cached --quiet; then
+            echo 'No image changes'
+          else
+            git commit -m 'Generate GV80 hybrid blog images'
+            git push
+          fi
