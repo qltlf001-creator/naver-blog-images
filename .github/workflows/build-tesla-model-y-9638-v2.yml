@@ -1,0 +1,33 @@
+name: Build Tesla Model Y 9638 V2 images
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build_tesla_model_y_9638_v2.py'
+      - '.github/workflows/build-tesla-model-y-9638-v2.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+          python -m pip install --upgrade pip pillow
+      - name: Generate images
+        run: python scripts/build_tesla_model_y_9638_v2.py
+      - name: Commit generated images
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 2026-09/tesla-model-y-9638-v2/*.png
+          if git diff --cached --quiet; then
+            echo 'No image changes'
+          else
+            git commit -m 'Generate Tesla Model Y 9638 V2 visuals [skip ci]'
+            git push
+          fi
