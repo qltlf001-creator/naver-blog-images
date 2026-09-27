@@ -1,0 +1,33 @@
+name: Build G80 GV70 recall blog images
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build_g80_gv70_recall_images.py'
+      - '.github/workflows/build-g80-gv70-recall-images.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+          python -m pip install --upgrade pip pillow
+      - name: Generate images
+        run: python scripts/build_g80_gv70_recall_images.py
+      - name: Commit generated images
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 2026-09/g80-gv70-fuel-line-recall/*.jpg
+          if git diff --cached --quiet; then
+            echo 'No image changes'
+          else
+            git commit -m 'Generate G80 GV70 recall blog images'
+            git push
+          fi
