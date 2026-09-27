@@ -1,0 +1,143 @@
+name: Build GV90 HQ V2 visuals
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-gv90-hq-v2.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          python -m pip install --quiet pillow requests beautifulsoup4
+      - name: Build premium editorial visuals from official Genesis images
+        shell: bash
+        run: |
+          cat > /tmp/build.py <<'PY'
+          import io, os, re, hashlib
+          from urllib.parse import urljoin
+          import requests
+          from bs4 import BeautifulSoup
+          from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
+
+          OUT='2026-09/gv90-current-issue-v2'
+          os.makedirs(OUT, exist_ok=True)
+          pages=[
+            'https://newsroom.genesis.com/a-new-icons-arrival-genesis-unveils-gv90-flagship-suv/',
+            'https://newsroom.genesis.com/genesis-gv90/',
+            'https://newsroom.genesis.com/ko-ko/%EC%A0%9C%EB%84%A4%EC%8B%9C%EC%8A%A4-%252C-GV90-%EB%84%A4%EC%98%A4%EB%A3%AC-%C2%B7GV90-%EC%B5%9C%EC%B4%88-%EA%B3%B5%EA%B0%9C/'
+          ]
+          headers={'User-Agent':'Mozilla/5.0'}
+          candidates=[]
+          for page in pages:
+            try:
+              r=requests.get(page,headers=headers,timeout=25); r.raise_for_status()
+              text=r.text.replace('\\/','/')
+              soup=BeautifulSoup(text,'html.parser')
+              for im in soup.find_all('img'):
+                for a in ('src','data-src','data-original','data-lazy-src'):
+                  u=im.get(a)
+                  if u: candidates.append(urljoin(page,u))
+                ss=im.get('srcset') or im.get('data-srcset')
+                if ss:
+                  for item in ss.split(','):
+                    candidates.append(urljoin(page,item.strip().split(' ')[0]))
+              candidates += re.findall(r'https?://[^\"\'<> ]+?\.(?:jpg|jpeg|png|webp)(?:\?[^\"\'<> ]*)?', text, re.I)
+            except Exception as e:
+              print('page error',page,e)
+
+          # prefer likely GV90 / media assets
+          def score(u):
+            s=0; lu=u.lower()
+            if 'gv90' in lu: s+=50
+            if '260820' in lu: s+=35
+            if 'genesis' in lu: s+=10
+            if any(x in lu for x in ['logo','icon','thumb','favicon']): s-=100
+            return s
+          uniq=[]; seen=set()
+          for u in sorted(candidates,key=score,reverse=True):
+            if u in seen: continue
+            seen.add(u); uniq.append(u)
+
+          sources=[]; hashes=set()
+          for u in uniq:
+            if len(sources)>=10: break
+            try:
+              rr=requests.get(u,headers=headers,timeout=20)
+              if rr.status_code!=200 or len(rr.content)<50000: continue
+              h=hashlib.sha1(rr.content).hexdigest()
+              if h in hashes: continue
+              im=Image.open(io.BytesIO(rr.content)).convert('RGB')
+              if im.width<1100 or im.height<600: continue
+              hashes.add(h); sources.append(im.copy()); print('source',u,im.size)
+            except Exception:
+              pass
+          if not sources:
+            raise SystemExit('No suitable official GV90 images found')
+
+          # Fonts
+          font_candidates=[
+            '/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',
+            '/usr/share/fonts/opentype/noto/NotoSansCJK-Black.ttc',
+            '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'
+          ]
+          fp=next(p for p in font_candidates if os.path.exists(p))
+          def F(sz): return ImageFont.truetype(fp,sz,index=1 if fp.endswith('.ttc') else 0)
+          GOLD=(222,176,76); WHITE=(250,250,250); LIGHT=(230,230,230)
+
+          def cover(im,w=1600,h=900):
+            r=max(w/im.width,h/im.height); nw,nh=int(im.width*r),int(im.height*r)
+            im=im.resize((nw,nh),Image.Resampling.LANCZOS)
+            left=(nw-w)//2; top=(nh-h)//2
+            return im.crop((left,top,left+w,top+h))
+
+          def poster(src, title1, title2, sub, chips, outfile, align='left'):
+            base=cover(src).filter(ImageFilter.GaussianBlur(.25))
+            base=ImageEnhance.Contrast(base).enhance(1.10)
+            base=ImageEnhance.Color(base).enhance(1.04)
+            ov=Image.new('RGBA',base.size,(0,0,0,0)); d=ImageDraw.Draw(ov)
+            # cinematic left gradient + top/bottom shading
+            for x in range(900):
+              a=int(205*(1-x/900)**1.7)
+              d.rectangle((x,0,x+1,900),fill=(4,8,14,a))
+            d.rectangle((0,0,1600,115),fill=(0,0,0,85)); d.rectangle((0,760,1600,900),fill=(0,0,0,75))
+            base=Image.alpha_composite(base.convert('RGBA'),ov)
+            d=ImageDraw.Draw(base)
+            # brand eyebrow
+            d.text((76,60),'GENESIS',font=F(28),fill=WHITE,stroke_width=1,stroke_fill=(0,0,0))
+            d.line((76,105,520,105),fill=GOLD,width=2)
+            # headline
+            y=145
+            d.text((72,y),title1,font=F(82),fill=WHITE,stroke_width=3,stroke_fill=(8,8,8)); y+=92
+            d.text((72,y),title2,font=F(92),fill=GOLD,stroke_width=3,stroke_fill=(8,8,8)); y+=120
+            d.text((76,y),sub,font=F(34),fill=LIGHT,stroke_width=2,stroke_fill=(8,8,8)); y+=75
+            # chips
+            x=72
+            for label,value in chips:
+              txt=f'{label}  {value}'
+              boxw=max(250,int(d.textbbox((0,0),txt,font=F(29))[2])+54)
+              d.rounded_rectangle((x,720,x+boxw,808),radius=18,fill=(5,8,12,220),outline=GOLD,width=2)
+              d.text((x+26,742),txt,font=F(29),fill=WHITE)
+              x+=boxw+18
+            base.convert('RGB').save(os.path.join(OUT,outfile),quality=92,optimize=True,progressive=True)
+
+          # use best official sources; repeat if fewer than five
+          while len(sources)<5: sources.append(sources[len(sources)%len(sources)])
+          poster(sources[0],'제네시스 GV90','출시 전 5가지','가격보다 먼저 볼 핵심 포인트', [('배터리','123.5kWh'),('주행','약 500km'),('급속충전','약 22분')], '01-homefeed.jpg')
+          poster(sources[1],'GV90 핵심 숫자','500km만 보면 놓친다','배터리 · 출력 · 충전시간', [('출력','490kW'),('토크','800Nm'),('배터리','123.5kWh')], '02-numbers.jpg')
+          poster(sources[2],'네오룬 아치 게이트','히든 B필러의 차이','2열 중심 플래그십 공간', [('도어','독립 개폐'),('핵심','2열 중심'),('포인트','개방감')], '03-arch-gate.jpg')
+          poster(sources[3],'GV90 라운지 기술','차 안이 VIP 라운지','정차 순간 달라지는 실내', [('화면','24.6인치'),('HUD','25인치'),('사운드','25스피커')], '04-lounge-tech.jpg')
+          poster(sources[4],'GV90 체크포인트','가격 공개 전 확인','출시일 · 인증거리 · 트림 차이', [('확인','공식 가격'),('확인','인증 주행거리'),('확인','트림 구성')], '05-checkpoints.jpg')
+          PY
+          python /tmp/build.py
+          git config user.name 'qltlf001-creator'
+          git config user.email 'qltlf001@gmail.com'
+          git add 2026-09/gv90-current-issue-v2
+          git commit -m 'Add GV90 HQ V2 visuals [skip ci]'
+          git push
