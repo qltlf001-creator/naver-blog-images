@@ -1,0 +1,172 @@
+name: Build GV90 premium V3 visuals
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-gv90-premium-v3.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          python -m pip install --quiet pillow requests beautifulsoup4
+      - name: Build homefeed-grade GV90 visuals
+        shell: bash
+        run: |
+          cat > /tmp/build.py <<'PY'
+          import io, os, re, hashlib, math
+          from urllib.parse import urljoin
+          import requests
+          from bs4 import BeautifulSoup
+          from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
+
+          OUT='2026-09/gv90-current-issue-v3'
+          os.makedirs(OUT, exist_ok=True)
+          pages=[
+            'https://www.genesis.com/kr/ko/models/gv90',
+            'https://newsroom.genesis.com/a-new-icons-arrival-genesis-unveils-gv90-flagship-suv/',
+            'https://newsroom.genesis.com/genesis-gv90/'
+          ]
+          H={'User-Agent':'Mozilla/5.0'}
+          cand=[]
+          for page in pages:
+            try:
+              r=requests.get(page,headers=H,timeout=25); r.raise_for_status()
+              txt=r.text.replace('\\/','/')
+              soup=BeautifulSoup(txt,'html.parser')
+              for im in soup.find_all('img'):
+                alt=(im.get('alt') or '').lower()
+                for a in ('src','data-src','data-original','data-lazy-src'):
+                  u=im.get(a)
+                  if u: cand.append((urljoin(page,u),alt))
+                ss=im.get('srcset') or im.get('data-srcset')
+                if ss:
+                  for item in ss.split(','):
+                    cand.append((urljoin(page,item.strip().split(' ')[0]),alt))
+              for u in re.findall(r'https?://[^\"\'<> ]+?\.(?:jpg|jpeg|png|webp)(?:\?[^\"\'<> ]*)?',txt,re.I):
+                cand.append((u,''))
+            except Exception as e:
+              print('page error',page,e)
+
+          def score(item):
+            u,alt=item; s=0; lu=u.lower(); la=alt.lower()
+            if 'gv90' in lu or 'gv90' in la: s+=100
+            if any(x in la for x in ['정측면','측면','외관','도로','네오룬','실내','2열','시트','디스플레이']): s+=40
+            if 'genesis' in lu: s+=10
+            if any(x in lu for x in ['logo','icon','favicon','thumb']): s-=200
+            return s
+
+          downloaded=[]; seen=set(); hashes=set()
+          for u,alt in sorted(cand,key=score,reverse=True):
+            if u in seen: continue
+            seen.add(u)
+            try:
+              rr=requests.get(u,headers=H,timeout=20)
+              if rr.status_code!=200 or len(rr.content)<70000: continue
+              hh=hashlib.sha1(rr.content).hexdigest()
+              if hh in hashes: continue
+              im=Image.open(io.BytesIO(rr.content)).convert('RGB')
+              if im.width<1200 or im.height<650: continue
+              hashes.add(hh); downloaded.append((im.copy(),alt,u)); print('source',im.size,alt,u)
+              if len(downloaded)>=18: break
+            except Exception: pass
+          if not downloaded: raise SystemExit('No suitable official GV90 images found')
+
+          # role-oriented source selection; fall back safely
+          def pick(words, fallback):
+            for im,alt,u in downloaded:
+              text=(alt+' '+u).lower()
+              if any(w.lower() in text for w in words): return im.copy()
+            return downloaded[fallback % len(downloaded)][0].copy()
+
+          src_exterior=pick(['정측면','외관','도로','주행'],0)
+          src_neolun=pick(['네오룬','neolun','도어','2열'],1)
+          src_interior=pick(['실내','시트','디스플레이','interior'],2)
+          src_alt=pick(['측면','외관'],3)
+
+          fps=[
+            '/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',
+            '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'
+          ]
+          fp=next(p for p in fps if os.path.exists(p))
+          def F(sz,bold=True): return ImageFont.truetype(fp,sz,index=1 if fp.endswith('.ttc') else 0)
+          GOLD=(242,194,91); GOLD2=(197,134,37); WHITE=(252,252,252); LIGHT=(230,232,235); BLACK=(7,8,10)
+
+          def cover(im,w=1600,h=900,focus='center'):
+            r=max(w/im.width,h/im.height); nw,nh=int(im.width*r),int(im.height*r)
+            im=im.resize((nw,nh),Image.Resampling.LANCZOS)
+            if focus=='right': left=max(0,nw-w)
+            elif focus=='left': left=0
+            else: left=max(0,(nw-w)//2)
+            top=max(0,(nh-h)//2)
+            return im.crop((left,top,left+w,top+h))
+
+          def glow_text(d,xy,text,font,fill,stroke=3):
+            x,y=xy
+            # subtle warm glow / shadow
+            for off,a in [(8,45),(5,70),(3,100)]:
+              d.text((x+off,y+off),text,font=font,fill=(0,0,0,a) if len(fill)==4 else (0,0,0),stroke_width=stroke+1,stroke_fill=(0,0,0))
+            d.text((x,y),text,font=font,fill=fill,stroke_width=stroke,stroke_fill=(12,12,12))
+
+          def chip(d,x,y,w,label,value):
+            d.rounded_rectangle((x,y,x+w,y+105),radius=18,fill=(5,7,10,225),outline=GOLD,width=2)
+            d.text((x+24,y+14),label,font=F(24),fill=LIGHT)
+            d.text((x+24,y+47),value,font=F(38),fill=GOLD)
+
+          def poster(src, outfile, kicker, big1, big2, sub, chips, focus='center'):
+            base=cover(src,focus=focus)
+            base=ImageEnhance.Contrast(base).enhance(1.14)
+            base=ImageEnhance.Color(base).enhance(1.08)
+            # cinematic vignette
+            rgba=base.convert('RGBA'); ov=Image.new('RGBA',rgba.size,(0,0,0,0)); d=ImageDraw.Draw(ov)
+            for x in range(960):
+              a=int(222*(1-x/960)**1.55)
+              d.rectangle((x,0,x+1,900),fill=(2,4,8,a))
+            for y in range(900):
+              a=int(55*abs(y-450)/450)
+              d.line((0,y,1600,y),fill=(0,0,0,a))
+            d.rectangle((0,0,1600,120),fill=(0,0,0,75))
+            d.rectangle((0,785,1600,900),fill=(0,0,0,88))
+            rgba=Image.alpha_composite(rgba,ov); d=ImageDraw.Draw(rgba)
+            # premium eyebrow
+            d.line((72,74,226,74),fill=GOLD,width=3)
+            d.text((252,52),'GENESIS',font=F(31),fill=WHITE)
+            d.line((470,74,624,74),fill=GOLD,width=3)
+            d.text((74,125),kicker,font=F(28),fill=LIGHT)
+            # huge headline
+            glow_text(d,(68,175),big1,F(104),WHITE,4)
+            glow_text(d,(68,292),big2,F(112),GOLD,4)
+            # hook line
+            d.text((74,430),sub,font=F(42),fill=WHITE,stroke_width=2,stroke_fill=(15,15,15))
+            d.line((74,494,700,494),fill=GOLD,width=3)
+            # chips bottom: max 3, large and legible
+            x=72
+            for label,value,w in chips[:3]:
+              chip(d,x,650,w,label,value); x+=w+18
+            # bottom editorial marker
+            d.text((76,828),'OFFICIAL DATA · EDITORIAL SUMMARY',font=F(22),fill=(215,215,215))
+            rgba.convert('RGB').save(os.path.join(OUT,outfile),quality=93,optimize=True,progressive=True)
+
+          poster(src_exterior,'01-homefeed.jpg','FLAGSHIP ELECTRIC SUV','GV90','출시 전 5가지','500km보다 먼저 볼 핵심',[
+            ('배터리','123.5 kWh',255),('주행','약 500 km',245),('급속충전','약 22분',245)],focus='center')
+          poster(src_alt,'02-numbers.jpg','NUMBERS THAT MATTER','GV90','핵심 숫자','500km만 보면 놓칩니다',[
+            ('출력','490 kW',235),('토크','800 Nm',235),('배터리','123.5 kWh',260)],focus='center')
+          poster(src_neolun,'03-neolun.jpg','NEOLUN SIGNATURE','네오룬','아치 게이트','히든 B필러 · 2열 중심 럭셔리',[
+            ('구조','히든 B필러',270),('도어','독립 개폐',235),('핵심','개방감',220)],focus='center')
+          poster(src_interior,'04-lounge.jpg','LUXURY LOUNGE','GV90','라운지 기술','정차 순간 달라지는 공간',[
+            ('화면','24.6인치',245),('HUD','25인치',220),('사운드','25스피커',245)],focus='center')
+          poster(src_exterior,'05-checkpoints.jpg','BUYER CHECKLIST','GV90','구매 전 체크','가격표 나오면 이 순서로',[
+            ('1','공식 가격',220),('2','인증 거리',220),('3','트림 차이',220)],focus='center')
+          PY
+          python /tmp/build.py
+          git config user.name 'qltlf001-creator'
+          git config user.email 'qltlf001@gmail.com'
+          git add 2026-09/gv90-current-issue-v3
+          git commit -m 'Add GV90 premium V3 homefeed-grade visuals [skip ci]'
+          git push
