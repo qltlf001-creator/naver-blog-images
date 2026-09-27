@@ -1,0 +1,25 @@
+name: Import GV90 HQ images
+on:
+  push:
+    paths:
+      - '_upload/gv90-hq/READY'
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode and publish images
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat _upload/gv90-hq/chunk-* > /tmp/gv90_images.b64
+          base64 -d /tmp/gv90_images.b64 > /tmp/gv90_images.zip
+          mkdir -p 2026-09/gv90-current-issue-v2
+          unzip -o /tmp/gv90_images.zip -d 2026-09/gv90-current-issue-v2
+          git config user.name 'qltlf001-creator'
+          git config user.email 'qltlf001@gmail.com'
+          git add 2026-09/gv90-current-issue-v2
+          git commit -m 'Add GV90 HQ homefeed visuals' || exit 0
+          git push
