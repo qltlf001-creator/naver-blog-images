@@ -1,0 +1,43 @@
+name: Build GV80 Source V5 Assets
+on:
+  push:
+    branches: [main]
+    paths:
+      - '_build/gv80-source-v5/READY'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install image dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          python -m pip install --quiet pillow
+      - name: Fetch approved public base visual
+        run: |
+          curl --fail --location --silent --show-error \
+            'https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/gv80-hybrid-20260928-v1/01-homefeed.jpg' \
+            -o /tmp/gv80-base.jpg
+      - name: Build source-compliant assets
+        env:
+          GV80_BASE: /tmp/gv80-base.jpg
+          GV80_OUT: _staging/gv80-source-v5-generated
+        run: |
+          python scripts/build_gv80_source_v5.py
+          sha256sum _staging/gv80-source-v5-generated/*.jpg | tee _staging/gv80-source-v5-generated/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gv80-source-v5-assets
+          path: _staging/gv80-source-v5-generated/
+          if-no-files-found: error
+      - name: Commit staging assets
+        run: |
+          git config user.name 'qltlf001-creator'
+          git config user.email 'qltlf001@gmail.com'
+          git add _staging/gv80-source-v5-generated
+          git rm -f _build/gv80-source-v5/READY
+          git commit -m 'Build GV80 source v5 staging assets'
+          git push
