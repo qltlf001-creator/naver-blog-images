@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="naver-article-sha256" content="533cccd31558d870087efb12ea932a1835766042f8108b53d438b67086c54a66">
+<title>디 올 뉴 투싼 10월 가격 공개, 현행 2,844만원이 기준점이 되는 이유 - 렌더링 미리보기</title>
+<style>
+html,body{margin:0;background:#f2f3f5;color:#222;font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif}*{box-sizing:border-box}
+.toolbar{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.98);border-bottom:1px solid #ddd;padding:10px 12px}.toolbar-inner{max-width:788px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{appearance:none;border:1px solid #111;border-radius:9px;background:#111;color:#fff;padding:11px 15px;min-height:44px;font-size:15px;font-weight:800;cursor:pointer}.btn.secondary{background:#fff;color:#111;border-color:#bbb}
+.status{font-size:13px;color:#555;line-height:1.45;flex:1;min-width:180px}.preview-shell{max-width:788px;margin:18px auto 40px;background:#fff;border:1px solid #e2e2e2;border-radius:14px;overflow:hidden}
+.title-panel{padding:28px 28px 8px}.title-label{font-size:13px;color:#777;margin-bottom:8px}.title-text{font-size:31px;line-height:1.42;font-weight:800;color:#111;letter-spacing:-.025em;word-break:keep-all}
+.hint{max-width:788px;margin:10px auto 0;padding:0 12px;font-size:13px;color:#666;line-height:1.65}
+#naverArticle{width:100%;max-width:760px;margin:0 auto;padding:18px 14px 48px;font-size:17px;line-height:1.9;font-weight:400;color:#222;background:#fff;word-break:keep-all;}
+</style>
+<!-- VERIFIED_ARTICLE_ASSET_URLS
+https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-20260928/01-homefeed-tucson-october.jpg
+https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-20260928/02-space-packaging.jpg
+https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-20260928/03-powertrain.jpg
+https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-20260928/04-digital-safety.jpg
+https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-20260928/05-price-decision.jpg
+-->
+</head>
+<body>
+<div class="toolbar"><div class="toolbar-inner">
+<button id="copyBodyBtn" class="btn" type="button">📋 렌더링 본문 복사</button>
+<button id="selectBodyBtn" class="btn secondary" type="button">본문 전체 선택</button>
+<button id="copyTitleBtn" class="btn secondary" type="button">제목 복사</button>
+<div id="copyStatus" class="status" aria-live="polite">본문을 불러오는 중입니다.</div>
+</div></div>
+<div class="hint">복사 버튼은 아래 실제 렌더링 본문 DOM 자체를 선택해 복사합니다. 자동 복사가 막히면 선택 상태를 유지합니다.</div>
+<div class="preview-shell">
+<div class="title-panel"><div class="title-label">네이버 블로그 제목</div><div id="blogTitle" class="title-text">디 올 뉴 투싼 10월 가격 공개, 현행 2,844만원이 기준점이 되는 이유</div></div>
+<div id="naverArticle" tabindex="-1"></div>
+</div>
+<script>
+(function(){
+const article=document.getElementById('naverArticle'),title=document.getElementById('blogTitle'),status=document.getElementById('copyStatus'),copyBtn=document.getElementById('copyBodyBtn'),selectBtn=document.getElementById('selectBodyBtn'),titleBtn=document.getElementById('copyTitleBtn');
+let loaded=false;
+function msg(t,ok){status.textContent=t;status.style.color=ok?'#176B4D':'#555'}
+function selectArticle(){if(!loaded){msg('본문을 아직 불러오는 중입니다.',false);return false}try{article.setAttribute('contenteditable','true');article.focus({preventScroll:true});const range=document.createRange();range.selectNodeContents(article);const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);return true}catch(e){return false}}
+function cleanup(){setTimeout(()=>article.removeAttribute('contenteditable'),0)}
+fetch('article.html',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.text()}).then(t=>{article.innerHTML=t;loaded=true;msg('미리보기를 확인한 뒤 ‘렌더링 본문 복사’를 누르세요.',true)}).catch(e=>{article.innerHTML='<div style="padding:30px;color:#B00000">본문을 불러오지 못했습니다. 페이지를 새로고침해 주세요.</div>';msg('본문 로드 실패: '+e.message,false)});
+selectBtn.addEventListener('click',()=>{if(selectArticle())msg('본문 전체가 선택됐습니다. 뜨는 메뉴에서 복사를 누르세요.',true);cleanup()});
+copyBtn.addEventListener('click',()=>{const selected=selectArticle();let ok=false;if(selected){try{ok=document.execCommand('copy')}catch(e){}}cleanup();if(ok)msg('✅ 렌더링 본문을 복사했습니다.',true);else if(selected)msg('자동 복사가 차단됐지만 선택은 유지했습니다. 화면의 복사를 누르세요.',false);else msg('직접 길게 눌러 복사해 주세요.',false)});
+titleBtn.addEventListener('click',()=>{const ta=document.createElement('textarea');ta.value=title.textContent.trim();ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,99999);let ok=false;try{ok=document.execCommand('copy')}catch(e){}ta.remove();msg(ok?'✅ 제목을 복사했습니다.':'제목을 직접 복사해 주세요.',ok)});
+})();
+</script>
+</body>
+</html>
