@@ -1,0 +1,42 @@
+{
+  "schema": "NAVER_ASSET_IDENTITY_MANIFEST_V1",
+  "article_html": "./article.html",
+  "preview_html": "./article.preview.html",
+  "assets": [
+    {
+      "role": "01-homefeed",
+      "authoritative_original": "./01-homefeed-tucson-hq.jpg",
+      "sha256": "1a30b42b36b574e9969e6bf5dcb386de16db8d78f3b5acb59fd81954a91ff7b4",
+      "download_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-hq-20260928/01-homefeed-tucson-hq.jpg",
+      "github_blob_sha": "f46daf04cdbf9d9620f7d59950dbd1dd8a9d4277"
+    },
+    {
+      "role": "02-space-packaging",
+      "authoritative_original": "./02-space-packaging-hq.jpg",
+      "sha256": "89c1caa8802a3e8cccc4b0259e7fd4ba1583a57263898f96bfb67e5272a303c1",
+      "download_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-hq-20260928/02-space-packaging-hq.jpg",
+      "github_blob_sha": "1ec135b8b64d2eb856506546c316da05695be2c9"
+    },
+    {
+      "role": "03-powertrain",
+      "authoritative_original": "./03-powertrain-hq.jpg",
+      "sha256": "1ab8de6c2850ebb4ef119df83e03a67df4089201e58515fe6e36fde61d433e07",
+      "download_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-hq-20260928/03-powertrain-hq.jpg",
+      "github_blob_sha": "d629f77266cd668a1acc2bc428ed6321cf7a4e43"
+    },
+    {
+      "role": "04-digital-cockpit",
+      "authoritative_original": "./04-digital-cockpit-hq.jpg",
+      "sha256": "27045bd58934a0aeb96648f9b34b5ae94fb047bb36a0a776c382b20349ecb591",
+      "download_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-hq-20260928/04-digital-cockpit-hq.jpg",
+      "github_blob_sha": "a34e9e5e451a3310783c7a5f1fc2f8caa0ff7753"
+    },
+    {
+      "role": "05-safety-decision",
+      "authoritative_original": "./05-safety-decision-hq.jpg",
+      "sha256": "f1d5a9f2c644c4fe3c377ad0f56266c6e522821c65cb34d28c987b1f536c5e52",
+      "download_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-hq-20260928/05-safety-decision-hq.jpg",
+      "github_blob_sha": "cba3405ec936cccdf2c0cabc12013517e4b4e491"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+PASS asset 1: SHA256=1a30b42b36b574e9969e6bf5dcb386de16db8d78f3b5acb59fd81954a91ff7b4 size=338906 dimensions=1600x900
+PASS asset 2: SHA256=89c1caa8802a3e8cccc4b0259e7fd4ba1583a57263898f96bfb67e5272a303c1 size=286495 dimensions=1600x900
+PASS asset 3: SHA256=1ab8de6c2850ebb4ef119df83e03a67df4089201e58515fe6e36fde61d433e07 size=280577 dimensions=1600x900
+PASS asset 4: SHA256=27045bd58934a0aeb96648f9b34b5ae94fb047bb36a0a776c382b20349ecb591 size=244413 dimensions=1600x900
+PASS asset 5: SHA256=f1d5a9f2c644c4fe3c377ad0f56266c6e522821c65cb34d28c987b1f536c5e52 size=284315 dimensions=1600x900
+PASS article SHA256 binding: fd9da7001deb5d9df89488e57ef5377c392c1a12bd6c926cb21cb51d8eb94a4f
+PASS exactly 5 HQ GitHub image URLs in article
+PASS embedded preview copy toolbar and selection fallback
+GOLDEN_HQ_RENDER_BUILD=PASS
