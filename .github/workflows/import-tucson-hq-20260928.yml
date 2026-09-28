@@ -1,0 +1,50 @@
+name: Import Tucson HQ images from Dropbox
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-tucson-hq-20260928.yml'
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download exact Dropbox originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p 2026-09/tucson-october-hq-20260928
+          curl -fL --max-time 90 'https://uceb6748941d9b57e2585079c7f3.dl.dropboxusercontent.com/cd/0/get/DI__ulCf7r1h0nsWrm47WA-GBUOofva1V-VHQZDjwSycZ0QPg5utN9s-cJX_d_J0fwRHJuqFEi5oMk_0137CSbPIV2kV7hLzYzkjxtmatykdN_Iggh075W0GRbn6tTn85mC0GM28jery6hmfHkV6DW0GH09FHyLmDRAUcNKn7V9SuQ/file?c_luid=3565984f' -o 2026-09/tucson-october-hq-20260928/01-homefeed-tucson-hq.jpg
+          curl -fL --max-time 90 'https://ucb6b868d20c709ad5e030c3f494.dl.dropboxusercontent.com/cd/0/get/DI-1m7epFBXnQetf-u2WMm69aasTw4yc66HTRnQPsahSl4UY-4JMzsEWyFbVq3E9lC9_cz-lJThfV7qwELkMqBXR2QG8_OjtW44aFu1QjGYasWAdhZ-Gu6zWQJCkCWKNF-sBjhk3Sq7vcfvNL9uj-fmo_s0S9_2BM1g06ZD2VMYLfw/file?c_luid=3565984f' -o 2026-09/tucson-october-hq-20260928/02-space-packaging-hq.jpg
+          curl -fL --max-time 90 'https://uc5243a383f9f8f646b990f25556.dl.dropboxusercontent.com/cd/0/get/DI8J92ICxTv8IKYwxl2PRSF6jTQtYzxjbPiDYfxuICkVK3t5WHh8Fq_8rlHIKdVSi5H3U-ao_OgSS9Qc9c91fnVDP1JxeqKEP21cThuMXsb_HWTs6JveDPG3jUN7uLpQ0re02c7G-InrhEu9I2FhxYPC0yO6q3z39Dp9KqDuw7Kecg/file?c_luid=3565984f' -o 2026-09/tucson-october-hq-20260928/03-powertrain-hq.jpg
+          curl -fL --max-time 90 'https://uc69957195e154c0ba77afb8877a.dl.dropboxusercontent.com/cd/0/get/DI8kaTyBzmHgoZvSGVm8hfbU0tEVazlyLCVfSBTH5n-kHhwz3Nq5cOralcYLB5pfopOjR0kmoR1nTMGUquoeONvbZUX7MebMUkN856wTB9vyZHqVG0OwL9P3R5zD95AiXAbJwrA0fSdiqUIrOz0ztGYvU0lemke2yS-z9FdpgLSRcQ/file?c_luid=3565984f' -o 2026-09/tucson-october-hq-20260928/04-digital-cockpit-hq.jpg
+          curl -fL --max-time 90 'https://uce2d711f733dcc8bb440d4eebb7.dl.dropboxusercontent.com/cd/0/get/DI8eZuSKbml1DuZ2aWeRFsCVwSpvebzQaw_6EVKq7mD_ks7K-apeWyO4J1ZUxRXRyY_dKNp28864umooXVlVnCAbcEyeSanu0J5vdPbmkx_Z842P0IuNixpNDeEhKYvkwDE1G5PIWg8jpjSRUoeFfHGSey0hZ2Ed5YvF_0aTpV8V9A/file?c_luid=3565984f' -o 2026-09/tucson-october-hq-20260928/05-safety-decision-hq.jpg
+      - name: Verify authoritative SHA-256 and sizes
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd 2026-09/tucson-october-hq-20260928
+          cat > SHA256SUMS <<'EOF'
+          1a30b42b36b574e9969e6bf5dcb386de16db8d78f3b5acb59fd81954a91ff7b4  01-homefeed-tucson-hq.jpg
+          89c1caa8802a3e8cccc4b0259e7fd4ba1583a57263898f96bfb67e5272a303c1  02-space-packaging-hq.jpg
+          1ab8de6c2850ebb4ef119df83e03a67df4089201e58515fe6e36fde61d433e07  03-powertrain-hq.jpg
+          27045bd58934a0aeb96648f9b34b5ae94fb047bb36a0a776c382b20349ecb591  04-digital-cockpit-hq.jpg
+          f1d5a9f2c644c4fe3c377ad0f56266c6e522821c65cb34d28c987b1f536c5e52  05-safety-decision-hq.jpg
+          EOF
+          sha256sum -c SHA256SUMS
+          test "$(stat -c%s 01-homefeed-tucson-hq.jpg)" = "338906"
+          test "$(stat -c%s 02-space-packaging-hq.jpg)" = "286495"
+          test "$(stat -c%s 03-powertrain-hq.jpg)" = "280577"
+          test "$(stat -c%s 04-digital-cockpit-hq.jpg)" = "244413"
+          test "$(stat -c%s 05-safety-decision-hq.jpg)" = "284315"
+      - name: Commit verified images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 2026-09/tucson-october-hq-20260928/*.jpg 2026-09/tucson-october-hq-20260928/SHA256SUMS
+          git commit -m 'Add verified Tucson HQ images from Dropbox [skip ci]'
+          git push
