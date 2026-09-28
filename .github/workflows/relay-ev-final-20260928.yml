@@ -1,0 +1,39 @@
+name: Relay final EV market images
+on:
+  push:
+    branches: [main]
+    paths:
+      - '_relay/ev-final-20260928/READY'
+permissions:
+  contents: write
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download final images from Dropbox and verify SHA256
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/ev-final 2026-09/ev-market-20260928-final
+          curl --fail --location --silent --show-error 'https://uc3c7a6f1372528a99dbd4af777a.dl.dropboxusercontent.com/cd/0/get/DI_e-I1JBmkyycxGVD35RQZylgKjRkYCVE3pPJlKVVgbtJQaDBEoAQUxud6zj-B4rBqjnZKsF4jardv0L2UuqLzYZHqx_opi-pa5AWdksEWuYrYVJMQH2YqilFjVIYhNUuIXOGQhHxVuvoYrFwtCk0GXYwQ3LDiy2SC3vySa1f5igg/file?c_luid=3565984f' -o /tmp/ev-final/01-homefeed.png
+          echo 'cd7af219023507b1fa9459b160844b83cb052d0d222b6fcae0babe031e133cf8  /tmp/ev-final/01-homefeed.png' | sha256sum -c -
+          curl --fail --location --silent --show-error 'https://uca398ef590e3ba0699b51a3b200.dl.dropboxusercontent.com/cd/0/get/DI8h6DhlqrrO3KeBfdnrDz3sYN9XU1oQ8AqBjlkh1mRPlAm1OinXfFTvASPHSh_K0W-KtUkYdX2FYzf4QllUDJjm2QiaBWp_tg7_HuAHaoC5z_qncHlA3Icwe3KogMJVIIcijF2Wt4SIeN6AK7lDrRQj-oMr2tV3DyefOIfbqxBgWg/file?c_luid=3565984f' -o /tmp/ev-final/02-market-decline.png
+          echo 'ba025875c753d4083e4ac4787d00f5c05ad3feff3de8017fcba7dcbb37bd8f45  /tmp/ev-final/02-market-decline.png' | sha256sum -c -
+          curl --fail --location --silent --show-error 'https://ucc96391cddfcc6383da24ca02ce.dl.dropboxusercontent.com/cd/0/get/DI9ebL7iRkjkMAXyJXM4tY4A9ovUtBxP-V47vGYERVq7GR0RikAG_xbr2So1zKKTL6gZNTzwsqh-5Kpy7VQX6dR1WWbMyQgkapAz4BPzdpxRWpyMOBhlk_zzI5o-XMyZEfJeYtvDWggJwVapi5fAXVDm6MP22IpPYqM08ar_tpBK4A/file?c_luid=3565984f' -o /tmp/ev-final/03-powertrain-shift.png
+          echo 'c3e43924cc3a3a2804d26be9a6dc514b9ce9c134c325d476ab9852b8d1da195b  /tmp/ev-final/03-powertrain-shift.png' | sha256sum -c -
+          curl --fail --location --silent --show-error 'https://uca2bd41bd2ca0960e1fb2fbfbce.dl.dropboxusercontent.com/cd/0/get/DI9cZMBPWq57oZqEOnhUV3rHug0O-uLRkDotj0yzW2R6TTKZGF2Toe1KudYdYicB5-EKISYFaiv81Y2ZRpJO6yUPBBwoCWJIyEJM-gMD7NssFxyWjU98jzFzQqG3p1ljFFX7lfmA2cuTtcQpLpwq18OPhX3QakLCZI2pIqg5wrNkmw/file?c_luid=3565984f' -o /tmp/ev-final/04-model-y-rank.png
+          echo 'eb15a4f2a775c259b796b64339f73c5a85cbd7f0c7f839e314600fc878db8495  /tmp/ev-final/04-model-y-rank.png' | sha256sum -c -
+          curl --fail --location --silent --show-error 'https://ucb2e4848767a1021a3ce59defb3.dl.dropboxusercontent.com/cd/0/get/DI9E2TrYadcZh0HjL2aUtwPhBP0gk7jad0D99-9UUHhOdyWGEisKOQBdhYMAtf2g-yTVLEkwNDlg5ILR7eUckPYen_lXi2_sMma1Z6arpeX7M1zx_5cKK8dsWiSKbsgHgOkT99cW62iyblPBlN5KaB0hit3p5xuvySQh7ImPJ4Y9fw/file?c_luid=3565984f' -o /tmp/ev-final/05-consumer-shift.png
+          echo '3651a884eb8612f662dd4d600de1c7620fde77d45a848ba3f3e753a6926e1fa7  /tmp/ev-final/05-consumer-shift.png' | sha256sum -c -
+          cp /tmp/ev-final/*.png 2026-09/ev-market-20260928-final/
+      - name: Commit final images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'qltlf001-creator'
+          git config user.email 'qltlf001@gmail.com'
+          git add 2026-09/ev-market-20260928-final
+          git rm -f _relay/ev-final-20260928/READY
+          git commit -m 'Publish final EV market images'
+          git push
