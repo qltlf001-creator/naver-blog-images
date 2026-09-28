@@ -1,0 +1,69 @@
+PASS: article HTML exists
+PASS: independent preview HTML exists
+PASS: preview SHA-256 binding matches article bytes
+PASS: preview copy contract token present: id="copyBodyBtn"
+PASS: preview copy contract token present: id="selectBodyBtn"
+PASS: preview copy contract token present: id="copyTitleBtn"
+PASS: preview copy contract token present: selectNodeContents(article)
+PASS: preview copy contract token present: execCommand('copy')
+PASS: article 760px profile
+PASS: article 17px profile
+PASS: article 1.9 line-height profile
+PASS: blockquote count 3-5
+PASS: no table callouts
+PASS: article exactly five image URLs: 5
+PASS: asset 1 authoritative original exists: 2026-09/tucson-october-20260928/01-homefeed-tucson-october.jpg
+PASS: asset 1 local bytes >=120KB: 232393
+PASS: asset 1 local dimensions >=1200x675: 1600x900
+PASS: asset 1 premium wide ratio: 1.778
+PASS: asset 1 metadata download_url equals HTML URL
+PASS: asset 1 metadata size equals local bytes
+PASS: asset 1 Git blob SHA resolved
+PASS: asset 1 raw SHA-256 equals authoritative original
+PASS: asset 1 raw byte length equals original
+PASS: asset 1 raw content-type image/*
+PASS: asset 2 authoritative original exists: 2026-09/tucson-october-20260928/02-space-packaging.jpg
+PASS: asset 2 local bytes >=120KB: 260897
+PASS: asset 2 local dimensions >=1200x675: 1600x900
+PASS: asset 2 premium wide ratio: 1.778
+PASS: asset 2 metadata download_url equals HTML URL
+PASS: asset 2 metadata size equals local bytes
+PASS: asset 2 Git blob SHA resolved
+PASS: asset 2 raw SHA-256 equals authoritative original
+PASS: asset 2 raw byte length equals original
+PASS: asset 2 raw content-type image/*
+PASS: asset 3 authoritative original exists: 2026-09/tucson-october-20260928/03-powertrain.jpg
+PASS: asset 3 local bytes >=120KB: 231997
+PASS: asset 3 local dimensions >=1200x675: 1600x900
+PASS: asset 3 premium wide ratio: 1.778
+PASS: asset 3 metadata download_url equals HTML URL
+PASS: asset 3 metadata size equals local bytes
+PASS: asset 3 Git blob SHA resolved
+PASS: asset 3 raw SHA-256 equals authoritative original
+PASS: asset 3 raw byte length equals original
+PASS: asset 3 raw content-type image/*
+PASS: asset 4 authoritative original exists: 2026-09/tucson-october-20260928/04-digital-safety.jpg
+PASS: asset 4 local bytes >=120KB: 251243
+PASS: asset 4 local dimensions >=1200x675: 1600x900
+PASS: asset 4 premium wide ratio: 1.778
+PASS: asset 4 metadata download_url equals HTML URL
+PASS: asset 4 metadata size equals local bytes
+PASS: asset 4 Git blob SHA resolved
+PASS: asset 4 raw SHA-256 equals authoritative original
+PASS: asset 4 raw byte length equals original
+PASS: asset 4 raw content-type image/*
+PASS: asset 5 authoritative original exists: 2026-09/tucson-october-20260928/05-price-decision.jpg
+PASS: asset 5 local bytes >=120KB: 256507
+PASS: asset 5 local dimensions >=1200x675: 1600x900
+PASS: asset 5 premium wide ratio: 1.778
+PASS: asset 5 metadata download_url equals HTML URL
+PASS: asset 5 metadata size equals local bytes
+PASS: asset 5 Git blob SHA resolved
+PASS: asset 5 raw SHA-256 equals authoritative original
+PASS: asset 5 raw byte length equals original
+PASS: asset 5 raw content-type image/*
+PASS: HTML img src order exactly equals verified asset sequence
+PASS: five identity-verified assets resolved
+
+GOLDEN_SOURCE_LOCK=PASS / EXTERNAL_ENFORCEMENT_LOCK=PASS / GOLDEN_RESULT=PASS
+ASSET_IDENTITY_PASS=YES / PREVIEW_BINDING_PASS=YES / CONVERGENCE_PASS=YES

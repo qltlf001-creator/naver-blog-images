@@ -1,0 +1,56 @@
+{
+  "schema": "NAVER_ASSET_IDENTITY_MANIFEST_V1",
+  "article_sha256": "533cccd31558d870087efb12ea932a1835766042f8108b53d438b67086c54a66",
+  "assets": [
+    {
+      "role": "01-homefeed",
+      "authoritative_original": "01-homefeed-tucson-october.jpg",
+      "sha256": "f5c6d278e30a97d4fb43b824dfe66095a8d2d3b4819caaded1fd2a131437fa2a",
+      "download_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-20260928/01-homefeed-tucson-october.jpg",
+      "github_blob_sha": "e9ce02c32ff29e64dbd703deb798142c3472777b",
+      "size": 232393,
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "role": "02-space",
+      "authoritative_original": "02-space-packaging.jpg",
+      "sha256": "408f1aad494fd0d599ea52489e7c079a12431991ad60a177030bc86b66abd74d",
+      "download_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-20260928/02-space-packaging.jpg",
+      "github_blob_sha": "36ab33308573576fdfba3e102ddc489490b676a0",
+      "size": 260897,
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "role": "03-powertrain",
+      "authoritative_original": "03-powertrain.jpg",
+      "sha256": "0e94ab9c1299b66e05142a42ffcc8ba9ae2321081eab521e5da8e41fa62a3f81",
+      "download_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-20260928/03-powertrain.jpg",
+      "github_blob_sha": "f241ea5138d9c3f015aa39f5850de0ce63d694bc",
+      "size": 231997,
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "role": "04-digital-safety",
+      "authoritative_original": "04-digital-safety.jpg",
+      "sha256": "1c68d0c8933b18e58841b510ad13b01e42a55c8de20b1313c59ac19785f4bd47",
+      "download_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-20260928/04-digital-safety.jpg",
+      "github_blob_sha": "7eb3bf3439509375b74a8d5d91fa895afe8293bd",
+      "size": 251243,
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "role": "05-price-decision",
+      "authoritative_original": "05-price-decision.jpg",
+      "sha256": "c2b5b538a41f43bf86c1c126aea200ddd7bd3db4dffb0d84d56ba67518e82e56",
+      "download_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/2026-09/tucson-october-20260928/05-price-decision.jpg",
+      "github_blob_sha": "da7e3b4ad82036b49fdfee547080857e20162ab9",
+      "size": 256507,
+      "width": 1600,
+      "height": 900
+    }
+  ]
+}
