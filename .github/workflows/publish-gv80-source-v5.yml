@@ -16,12 +16,14 @@ jobs:
         run: |
           set -euo pipefail
           test -f _staging/gv80-source-v5-generated/SHA256SUMS.txt
-          (cd _staging/gv80-source-v5-generated && sha256sum -c SHA256SUMS.txt)
+          sha256sum -c _staging/gv80-source-v5-generated/SHA256SUMS.txt
           rm -rf 2026-09/gv80-hybrid-source-v5
           mkdir -p 2026-09/gv80-hybrid-source-v5
           cp _staging/gv80-source-v5-generated/*.jpg 2026-09/gv80-hybrid-source-v5/
           cp _staging/gv80-source-v5-generated/SHA256SUMS.txt 2026-09/gv80-hybrid-source-v5/
-          (cd 2026-09/gv80-hybrid-source-v5 && sha256sum -c SHA256SUMS.txt)
+          for f in 01-homefeed.jpg 02-launch.jpg 03-price.jpg 04-efficiency.jpg 05-specs.jpg; do
+            cmp "_staging/gv80-source-v5-generated/$f" "2026-09/gv80-hybrid-source-v5/$f"
+          done
       - name: Commit final public asset set
         shell: bash
         run: |
