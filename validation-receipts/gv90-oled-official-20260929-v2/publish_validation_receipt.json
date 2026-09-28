@@ -1,0 +1,31 @@
+{
+  "schema": "NAVER_PUBLISH_VALIDATION_RECEIPT_V1",
+  "project_version": "8.4.18-PATCH10",
+  "convergence_pass": true,
+  "validated_at_utc": "2026-09-28T22:45:41.420896+00:00",
+  "article_sha256": "bfd987e40060978c6e273acf0dd9c9545a645bc663703079931b5ad37931ef21",
+  "preview_sha256": "e6ee9c4e94ab6f671f3e950d0bc468d075b559938d164bb9fd92eb22a748c5c1",
+  "asset_manifest_sha256": "c8b028ff4caebc6db1567dca43af87e6af16c5061fc71571df3f5b18a4de81b3",
+  "current_asset_set_sha256": "d4e481d75b54eb42b11e4ece83ea18172bb607538b540a48d80de24b54ad1d5b",
+  "copy_algorithm_sha256": "d942514df81a7baa8d06b8d2befbdf7c29537acaf60a08431b172a1efc790196",
+  "validator_sha256": {
+    "validate_editorial_html.py": "607a42e53994f926245c140b187bd5b0ac264be5b05bbdfe41f74af1d9dfb26d",
+    "validate_golden_preview_lock.py": "77f4c83810a9bd46bf7170b1a4fbb882ba7af407029c2b296e547ddcdb83bfe0",
+    "validate_asset_identity.py": "20a0dffe6439d788656d4615b6f897cc6a6e9f7ab9da02fc918732ae53ec4590",
+    "validate_one_shot_publish.py": "c87808176b5f9d96b8fcb7dd6c28849f667b16489c6c38d541579f410de095bb",
+    "validate_publish_bundle.py": "d65696ca512999ddd00dba57e05da8c0af2f348206d8e03361a8eff6ea8d4ab7"
+  },
+  "tokens": [
+    "ONE_SHOT_PIPELINE_LOCK=PASS",
+    "CURRENT_ASSET_SET_LOCK=PASS",
+    "OLD_ASSET_REFERENCE_PASS=YES",
+    "COPY_ALGORITHM_LOCK=PASS",
+    "GOLDEN_SOURCE_LOCK=PASS",
+    "EXTERNAL_ENFORCEMENT_LOCK=PASS",
+    "GOLDEN_RESULT=PASS",
+    "DROPBOX_GITHUB_CHAIN_PASS=YES",
+    "ASSET_IDENTITY_PASS=YES",
+    "PREVIEW_BINDING_PASS=YES",
+    "CONVERGENCE_PASS=YES"
+  ]
+}
