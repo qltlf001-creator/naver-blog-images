@@ -1,0 +1,34 @@
+name: Publish GV80 Source V5 Assets
+on:
+  push:
+    branches: [main]
+    paths:
+      - '_publish/gv80-source-v5/READY'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify staged assets and publish exact bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f _staging/gv80-source-v5-generated/SHA256SUMS.txt
+          (cd _staging/gv80-source-v5-generated && sha256sum -c SHA256SUMS.txt)
+          rm -rf 2026-09/gv80-hybrid-source-v5
+          mkdir -p 2026-09/gv80-hybrid-source-v5
+          cp _staging/gv80-source-v5-generated/*.jpg 2026-09/gv80-hybrid-source-v5/
+          cp _staging/gv80-source-v5-generated/SHA256SUMS.txt 2026-09/gv80-hybrid-source-v5/
+          (cd 2026-09/gv80-hybrid-source-v5 && sha256sum -c SHA256SUMS.txt)
+      - name: Commit final public asset set
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'qltlf001-creator'
+          git config user.email 'qltlf001@gmail.com'
+          git add 2026-09/gv80-hybrid-source-v5
+          git rm -f _publish/gv80-source-v5/READY
+          git commit -m 'Publish GV80 source v5 final assets'
+          git push
