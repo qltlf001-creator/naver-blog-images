@@ -1,0 +1,44 @@
+name: Relay GV90 OLED official V2 assets
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/relay-gv90-oled-official-20260929-v2.yml'
+permissions:
+  contents: write
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Download exact Dropbox bytes and verify SHA-256
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT='2026-09/gv90-oled-official-20260929-v2'
+          mkdir -p "$OUT"
+          curl -fL --retry 2 --connect-timeout 20 'https://ucb2cfd09d841f52c402b3577c75.dl.dropboxusercontent.com/cd/0/get/DJA_KCRdAuKwTlHUCL1WHXu1t_pCJ8pJ6h2qTV5ejC-BW8srRyF6_7esCKU20MVKzSNrbvr_B6KVmiCrDDuH7lagIuRZ4oyC94n3D8wFJCqNk1z3NT6ytcHt8SwrML8pjTdvt3-wO0GV0FKNmydDVu5jCmWhphbDW6nAxD1ihC4sdQ/file?c_luid=3565984f' -o "$OUT/01-homefeed.jpg"
+          echo 'a6d04fea48da19d42ecf6bf48d149bdc4a10af0f34d0fabd5531c3e31d67c8bc  2026-09/gv90-oled-official-20260929-v2/01-homefeed.jpg' | sha256sum -c -
+          curl -fL --retry 2 --connect-timeout 20 'https://uc7add15a9b0be9c37961a9b1b8e.dl.dropboxusercontent.com/cd/0/get/DJD7j16AlQ89YexOI3zyaaYJUmyjNkhkeR7RN25HRXMIAD2eoohT1i7dChIOStfZhWnvCn69HxdSlX4x4Zypjuwch7wIvdONmv4ElYjmEmjKwsbQjCRfwDjh-xwXFL4fFqHpn0g9nyys9XRgpW2kBHaGx6vytXgSoDxoaJp4RIeyOQ/file?c_luid=3565984f' -o "$OUT/02-display.jpg"
+          echo '1fa508fc87884cd66ff587465ff1d7e8dd6391589e4337b9e7d0a26b1c059c73  2026-09/gv90-oled-official-20260929-v2/02-display.jpg' | sha256sum -c -
+          curl -fL --retry 2 --connect-timeout 20 'https://uc5b181f803f6ba723f0bc244b7d.dl.dropboxusercontent.com/cd/0/get/DJAMREISEoab13z7MekwNK-ao4KqLrmqqv9pU1U9yz6Lh_TliFR1AyJJs9PLEpYVBat_7pd8lAPpASSdz8EZsQnqAIWBKdRJnao2YybNuPeC5g1rciTi76iHeDXwspmsWUQmiaoCPJMUPeBiOTCgybKo16XgngfAWI2jvOj8yXyK5g/file?c_luid=3565984f' -o "$OUT/03-pleos.jpg"
+          echo 'd09fe5f05681013b99644f038df21ad4865fe8b05c1593e035027dac023ab817  2026-09/gv90-oled-official-20260929-v2/03-pleos.jpg' | sha256sum -c -
+          curl -fL --retry 2 --connect-timeout 20 'https://uc23ceda0cfbb3f48d323d4f3607.dl.dropboxusercontent.com/cd/0/get/DJBEdCWtc0hL0iaNv5D1oKky-dq-YF-S6Ef5IqcWo04MwRev5HHqHNQ6fMEpJJFnlpBcHu-lfzq_d5Xqs_3hRNz93qH1YmiofNERiAAOtDHB5_zJ6PiaPAFYL7i4sd2okJItbipG9r6SGnLbwbYJ1JtoQPy40reBeUq-avdDzsi02g/file?c_luid=3565984f' -o "$OUT/04-development.jpg"
+          echo '9106f8187e5c1b37df156fdb30ecd4e940f781c7e6e4769f41ee2381e7fa1bd5  2026-09/gv90-oled-official-20260929-v2/04-development.jpg' | sha256sum -c -
+          curl -fL --retry 2 --connect-timeout 20 'https://uc087fcd8ffff5d0579a4908f088.dl.dropboxusercontent.com/cd/0/get/DJBgHOKexYDf-V7nCABNljwzqYmZq_LHZuiWjKIr8sqDlF1AcME49GnsbquX7dYoulFZF6ZmMMNEJY-FGrPLMv4Frtej6-tg2j477_9YdI3pMkiLkFL5PbcR8qnDqhtJgH1CGj3YS4eKR9_rLCO6uxodm9hJF8bCGEO5TAI4rpX4NA/file?c_luid=3565984f' -o "$OUT/05-theater.jpg"
+          echo 'fbc98655ee508faecfd63a0d99c75467905be6da8829b2c6fcdb6bf0bc041ceb  2026-09/gv90-oled-official-20260929-v2/05-theater.jpg' | sha256sum -c -
+      - name: Commit exact bytes to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'qltlf001-creator'
+          git config user.email 'qltlf001@gmail.com'
+          git add 2026-09/gv90-oled-official-20260929-v2
+          if git diff --cached --quiet; then
+            echo 'NOOP_SUCCESS: exact bytes already on main'
+          else
+            git commit -m 'Publish GV90 official photo assets V2 [skip ci]'
+            git push origin main
+          fi
