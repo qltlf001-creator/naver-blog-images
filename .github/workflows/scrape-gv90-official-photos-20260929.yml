@@ -1,0 +1,96 @@
+name: Scrape GV90 official photo candidates
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/scrape-gv90-official-photos-20260929.yml'
+permissions:
+  contents: read
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install deps
+        run: python -m pip install --quiet requests beautifulsoup4 pillow
+      - name: Collect official Genesis media candidates
+        run: |
+          python - <<'PY'
+          import io, os, re, json, hashlib, textwrap
+          from urllib.parse import urljoin
+          import requests
+          from bs4 import BeautifulSoup
+          from PIL import Image, ImageOps, ImageDraw, ImageFont
+          pages=[
+            ('flagship','https://newsroom.genesis.com/a-new-icons-arrival-genesis-unveils-gv90-flagship-suv/'),
+            ('theater','https://newsroom.genesis.com/redefining-space-with-the-genesis-gv90s-luxury-home-theater/'),
+            ('preview','https://newsroom.genesis.com/genesis-gv90-exclusive-preview-a-new-vision-of-luxury-inspired-by-the-moon-jar/'),
+            ('gallery','https://newsroom.genesis.com/genesis-gv90/')
+          ]
+          H={'User-Agent':'Mozilla/5.0'}
+          out='gv90-official-candidates'; os.makedirs(out,exist_ok=True)
+          cand=[]
+          for label,page in pages:
+            r=requests.get(page,headers=H,timeout=40); r.raise_for_status()
+            txt=r.text.replace('\\/','/')
+            soup=BeautifulSoup(txt,'html.parser')
+            for im in soup.find_all('img'):
+              alt=(im.get('alt') or '').strip()
+              vals=[]
+              for a in ('src','data-src','data-original','data-lazy-src'):
+                if im.get(a): vals.append(im.get(a))
+              for a in ('srcset','data-srcset'):
+                if im.get(a): vals += [x.strip().split(' ')[0] for x in im.get(a).split(',') if x.strip()]
+              for u in vals:
+                cand.append((label,urljoin(page,u),alt,page))
+            for u in re.findall(r'https?://[^\"\'<> ]+?\.(?:jpg|jpeg|png|webp)(?:\?[^\"\'<> ]*)?',txt,re.I):
+              cand.append((label,u,'',page))
+          seen=set(); hashes=set(); rows=[]; idx=0
+          def score(label,u,alt,w,h):
+            t=(u+' '+alt).lower(); s=min(w*h/100000,80)
+            if 'gv90' in t: s+=140
+            if label=='theater': s+=50
+            if any(k in t for k in ['interior','display','cinematic','pleos','seat','rear','exterior','neolun','lounge']): s+=35
+            if any(k in t for k in ['logo','icon','avatar','favicon','thumb']): s-=400
+            if w/h>1.45: s+=20
+            return s
+          temp=[]
+          for label,u,alt,page in cand:
+            if u in seen: continue
+            seen.add(u)
+            try:
+              rr=requests.get(u,headers=H,timeout=30)
+              if rr.status_code!=200 or len(rr.content)<120000: continue
+              hh=hashlib.sha256(rr.content).hexdigest()
+              if hh in hashes: continue
+              im=Image.open(io.BytesIO(rr.content)).convert('RGB')
+              if im.width<1200 or im.height<675: continue
+              hashes.add(hh)
+              temp.append((score(label,u,alt,im.width,im.height),label,u,alt,page,im,hh))
+            except Exception: pass
+          temp.sort(key=lambda x:x[0], reverse=True)
+          temp=temp[:30]
+          for n,(sc,label,u,alt,page,im,hh) in enumerate(temp,1):
+            fn=f'{n:02d}-{label}.jpg'; p=os.path.join(out,fn)
+            im.save(p,quality=94,optimize=True)
+            rows.append({'n':n,'file':fn,'label':label,'score':round(sc,1),'alt':alt,'source_url':u,'page':page,'width':im.width,'height':im.height,'sha256':hh})
+          with open(os.path.join(out,'manifest.json'),'w') as f: json.dump(rows,f,ensure_ascii=False,indent=2)
+          # contact sheet
+          thumbs=[]
+          for r in rows:
+            im=Image.open(os.path.join(out,r['file'])).convert('RGB')
+            im=ImageOps.fit(im,(480,270),method=Image.Resampling.LANCZOS)
+            canvas=Image.new('RGB',(480,318),'white'); canvas.paste(im,(0,0))
+            d=ImageDraw.Draw(canvas); d.text((10,279),f"{r['n']:02d} {r['label']} {r['width']}x{r['height']}",fill='black')
+            thumbs.append(canvas)
+          cols=3; rows_n=(len(thumbs)+cols-1)//cols
+          sheet=Image.new('RGB',(cols*480,rows_n*318),(230,230,230))
+          for i,t in enumerate(thumbs): sheet.paste(t,((i%cols)*480,(i//cols)*318))
+          sheet.save(os.path.join(out,'contact-sheet.jpg'),quality=90)
+          print('saved',len(rows),'candidates')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gv90-official-candidates
+          path: gv90-official-candidates
+          retention-days: 1
