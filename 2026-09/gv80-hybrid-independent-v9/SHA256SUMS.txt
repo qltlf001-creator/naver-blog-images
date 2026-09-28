@@ -1,0 +1,5 @@
+0ddf56a21fb8dff66f4b1eb558b5ae4b6b920e64896ee2223a53637ab72e4944  2026-09/gv80-hybrid-independent-v9/01-homefeed.jpg
+1046db56c0f498eed1e8593e837a140ab9fdced45af1373ab652453e0afd00e6  2026-09/gv80-hybrid-independent-v9/02-launch.jpg
+c74e0bb5f62274e18029c9cb067c23e5b372bd0e4df4d10332194f8bb15dc9e6  2026-09/gv80-hybrid-independent-v9/03-price.jpg
+0961519146c5fb1bbf7a4bfb3a0077ba14a94c90771c0d0d86c323beef4ec648  2026-09/gv80-hybrid-independent-v9/04-efficiency.jpg
+923229985518417394e99b71c639a0ed2ec9d473be39fa2bb94351a04eaedae0  2026-09/gv80-hybrid-independent-v9/05-specs.jpg
