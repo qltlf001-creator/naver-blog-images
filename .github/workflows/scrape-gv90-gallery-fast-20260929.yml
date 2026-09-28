@@ -1,0 +1,68 @@
+name: Scrape GV90 gallery photos fast
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/scrape-gv90-gallery-fast-20260929.yml'
+permissions:
+  contents: read
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests beautifulsoup4 pillow
+      - name: Download official gallery media
+        run: |
+          python - <<'PY'
+          import os, io, re, json, hashlib
+          from urllib.parse import urljoin
+          import requests
+          from bs4 import BeautifulSoup
+          from PIL import Image,ImageOps,ImageDraw
+          page='https://newsroom.genesis.com/genesis-gv90/'
+          H={'User-Agent':'Mozilla/5.0'}
+          html=requests.get(page,headers=H,timeout=12).text.replace('\\/','/')
+          soup=BeautifulSoup(html,'html.parser')
+          cand=[]
+          for im in soup.find_all('img'):
+            alt=(im.get('alt') or '').strip()
+            for a in ('src','data-src','data-original','data-lazy-src'):
+              u=im.get(a)
+              if u: cand.append((urljoin(page,u),alt))
+            ss=im.get('srcset') or im.get('data-srcset') or ''
+            for item in ss.split(','):
+              if item.strip(): cand.append((urljoin(page,item.strip().split()[0]),alt))
+          for u in re.findall(r'https?://[^\"\'<> ]+?\.(?:jpg|jpeg|png|webp)(?:\?[^\"\'<> ]*)?',html,re.I): cand.append((u,''))
+          out='gv90-gallery-fast';os.makedirs(out,exist_ok=True)
+          seen=set();hashes=set();items=[]
+          for u,alt in cand:
+            if u in seen: continue
+            seen.add(u)
+            if len(items)>=18: break
+            try:
+              r=requests.get(u,headers=H,timeout=6)
+              if r.status_code!=200 or len(r.content)<120000: continue
+              h=hashlib.sha256(r.content).hexdigest()
+              if h in hashes: continue
+              im=Image.open(io.BytesIO(r.content)).convert('RGB')
+              if im.width<1200 or im.height<675: continue
+              hashes.add(h); fn=f'{len(items)+1:02d}.jpg'; im.save(os.path.join(out,fn),quality=94,optimize=True)
+              items.append({'file':fn,'alt':alt,'source_url':u,'width':im.width,'height':im.height,'sha256':h})
+            except Exception as e: print('skip',u,e)
+          with open(os.path.join(out,'manifest.json'),'w') as f: json.dump(items,f,ensure_ascii=False,indent=2)
+          thumbs=[]
+          for i,r in enumerate(items,1):
+            im=Image.open(os.path.join(out,r['file'])).convert('RGB'); im=ImageOps.fit(im,(480,270),method=Image.Resampling.LANCZOS)
+            c=Image.new('RGB',(480,315),'white');c.paste(im,(0,0));ImageDraw.Draw(c).text((10,278),f"{i:02d} {r['width']}x{r['height']}",fill='black');thumbs.append(c)
+          sheet=Image.new('RGB',(1440,max(315,((len(thumbs)+2)//3)*315)),(235,235,235))
+          for i,t in enumerate(thumbs):sheet.paste(t,((i%3)*480,(i//3)*315))
+          sheet.save(os.path.join(out,'contact-sheet.jpg'),quality=90)
+          print('COUNT',len(items))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gv90-gallery-fast
+          path: gv90-gallery-fast
+          retention-days: 1
