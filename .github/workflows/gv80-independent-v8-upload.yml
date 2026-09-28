@@ -1,0 +1,43 @@
+name: GV80 independent v8 upload
+on:
+  push:
+    branches: [gv80-independent-v8]
+    paths:
+      - '_staging/gv80-independent-v8-ready.txt'
+permissions:
+  contents: write
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gv80-independent-v8
+      - name: Download independent images from Dropbox
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p 2026-09/gv80-hybrid-independent-v8
+          curl -L --fail --silent --show-error 'https://ucb83d52b558ceb1a3c82fc7d782.dl.dropboxusercontent.com/cd/0/get/DI_nLY5sOmauUQ_teRKjJY2izd5QlwXA-NI6tMwkOPP-_G1Tf9Q5o0f13oOPIyWDAY6viau18Y7rQ2OC2kdCEu_KlxfcVRMoTgXV_JJlsFIcgHeq9b_O1mdVtaMFkAQFJdJ2O6AvNWT81AndBIaKE5ZVtT9DnlqY-ZZeTOCTTeTZYg/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v8/01-homefeed.jpg
+          curl -L --fail --silent --show-error 'https://ucbf5d896a53cc2818c1805341de.dl.dropboxusercontent.com/cd/0/get/DI-GtTTw8HWpMOTpP-ngTrqp1o902mdGxyFGZTBamrCplBp3ZZy3J9XlSp8AuU4-mh0VSv5DrRqxT4hdUBepdZ2UTIXFvkJtsPURqFU1ut2rXaMbeQuy7JksqaX4seK51Kid1YQnvrWKcA83BcPkh6PYAOHomsPaL9DmwiiYLUBfdg/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v8/02-launch.jpg
+          curl -L --fail --silent --show-error 'https://ucd9863145ec5ad4daf0a3158fd5.dl.dropboxusercontent.com/cd/0/get/DI_cN6T2WxZHc3aDTGygrZPNOBJOfJhIPR-3Vm8YWLRPCIecR-3tyjS4OmKkSuObG3kToMWYbapHfGKZgAuG7G5VljYlbqQPCV5GZLgsK32D48cOuwqTi1CNfvagRHd8YliHCaGlXqpbiN8CRorIuCgnxtH23yLlV_9HWvhmAEWqHg/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v8/03-price.jpg
+          curl -L --fail --silent --show-error 'https://uc4454b22e876c891a633310f010.dl.dropboxusercontent.com/cd/0/get/DI8JD54LgZItp4XeYGBENo5PFPy-w6zw4WgE2iBkEOj-eoOyXh0rfwYh-1Sb16CsFtLv1ciKSAkZqS9J-_SUvzY-6cPxAup3lze0BjgYWkGi0xYr7MfQLUtaNOgTwnDOv2mWmdXOyTrdto7O9WHzhd8oLCRA5JTa16BZySVcxjeRKA/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v8/04-efficiency.jpg
+          curl -L --fail --silent --show-error 'https://uc961f3585b64bd4253b7811a812.dl.dropboxusercontent.com/cd/0/get/DI-JuuzSHCQ--P7Co30Ehu3NRzCNSdBAFt2eo9CsKK_GxrtSuXCr1k_POGKWk3f4okoIk9YMkMO8LrjLkFLGJyVCXEsFInuR3zouz2ptPIGLnk165dpjPou_diO8u1SMpYMNkbplqzYaspjS22Fl6Z17xr06qSH0V4wzQjtNxa1qEg/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v8/05-specs.jpg
+      - name: Verify SHA256
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '0ddf56a21fb8dff66f4b1eb558b5ae4b6b920e64896ee2223a53637ab72e4944  2026-09/gv80-hybrid-independent-v8/01-homefeed.jpg' | sha256sum -c -
+          echo '1046db56c0f498eed1e8593e837a140ab9fdced45af1373ab652453e0afd00e6  2026-09/gv80-hybrid-independent-v8/02-launch.jpg' | sha256sum -c -
+          echo 'c74e0bb5f62274e18029c9cb067c23e5b372bd0e4df4d10332194f8bb15dc9e6  2026-09/gv80-hybrid-independent-v8/03-price.jpg' | sha256sum -c -
+          echo '0961519146c5fb1bbf7a4bfb3a0077ba14a94c90771c0d0d86c323beef4ec648  2026-09/gv80-hybrid-independent-v8/04-efficiency.jpg' | sha256sum -c -
+          echo '923229985518417394e99b71c639a0ed2ec9d473be39fa2bb94351a04eaedae0  2026-09/gv80-hybrid-independent-v8/05-specs.jpg' | sha256sum -c -
+      - name: Commit images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 2026-09/gv80-hybrid-independent-v8/*.jpg
+          git commit -m 'Publish GV80 independent v8 images'
+          git push origin HEAD:gv80-independent-v8
