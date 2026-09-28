@@ -1,0 +1,38 @@
+name: Relay EV market assets from Dropbox v2
+on:
+  push:
+    branches: [main]
+    paths:
+      - '_relay/ev-market-20260928/READY2'
+permissions:
+  contents: write
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download verified Dropbox originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/ev-market 2026-09/ev-market-20260928
+          curl -fL 'https://ucd5c6379157c12285004fa0dda7.dl.dropboxusercontent.com/cd/0/get/DI_QmXSZBuLHRsXxNfPAuBlvD0-Sx7-JErPsdY90hmIUwxk9vpE8xlQGGI3jXDmNAj07gSqTH5WcV_YPXQlzIRhRPDBHhsV1jBkTzdluCfyeAVTDAYJ0pqesySex5X-7iFmFPgxvDbNDWhrVhRPsjDvQZo5XtrarLti3v4PalydFHQ/file?c_luid=3565984f' -o /tmp/ev-market/01-homefeed.png
+          echo 'b1fdb3c077427254447dcdea56a553a3aec017eff02bdd070f13e6b55f8b56b7  /tmp/ev-market/01-homefeed.png' | sha256sum -c -
+          curl -fL 'https://uce9801ff1f794ae064228bc2280.dl.dropboxusercontent.com/cd/0/get/DI_B8AermAjb-D25PJ0hKgmpaZiRjHP5KCLZXNxVGGcMo-VrgECNKL_Pl15q6Jh-wkbrBqNzkia3cT_-Rb8HVgtr8wB98jOsFzHbDlmRC7iGR9odr_4teVQ9GHzs3LjZN1Q5fEoqnsggPveynf594MSYS0ikM75kmEX9KkMYEJDwaQ/file?c_luid=3565984f' -o /tmp/ev-market/02-sales-rank.png
+          echo 'fe0420852a9d66937c0695e0eed980e05fb5f72ad12ac20fd3f7d3618cb3a2c6  /tmp/ev-market/02-sales-rank.png' | sha256sum -c -
+          curl -fL 'https://uc5d24b710cbdd3cc6b5243000b5.dl.dropboxusercontent.com/cd/0/get/DI8cacBkeVjYvKzz_gKviw9DU7utpBgbUVXrhI4UYR3-7WOZkNQMwDMm0SW1aUOrDjtE2g81y7h1OkxNO36TvKk2TYHP9I7Sb_3VCw_aHuf_j4joSkx0SzQl2TV6KDlZ_u5GDnJqNFqBJHIWHjOcZ0jzJt1fx-WPN0JeJvXkp9OrwA/file?c_luid=3565984f' -o /tmp/ev-market/03-powertrain-shift.png
+          echo '098e57fc126eff9bfe4574af8c49555fb46a9c6daa2381f82e4b84797033fc1a  /tmp/ev-market/03-powertrain-shift.png' | sha256sum -c -
+          curl -fL 'https://ucaaea9dcff28e326cf8b84d7c75.dl.dropboxusercontent.com/cd/0/get/DI8yQu3GLccf6W1eq_a9b-PqlxMELBAyijSWH6JghDrTtOgK3Sb3fP2KJyZwVdhqRF4imJpSXa5jfbI7YwtohsXKHqL_7C5kO9IgTaN_LSni6FPOeoz6XUXPhDlHUU3N_2239AqyA5L_DxIEcdRx8FoOE9WTTRXAVkUadKGhoXex5w/file?c_luid=3565984f' -o /tmp/ev-market/04-charging-usage.png
+          echo '0088a95caf3927183276c4e12d5c6193617ee9577a0891b1b5cbfc0a5e9c3f06  /tmp/ev-market/04-charging-usage.png' | sha256sum -c -
+          curl -fL 'https://uc770572f79dbcee3427a10cc109.dl.dropboxusercontent.com/cd/0/get/DI9SBtc2qLkmVxe3I-XddDMYUuy-oDrjr1JzTP7xvym2RXme3MX2Kw4ACDNynD2luK7V6207Eu0Ux-a96IjF9dJn1MUcC6VYN4rZoEt7eOLI8Y3Fxf2sVH0T5fA_svJw_q94_gP3V2973nOeX0-D5y8TXI4pMSqKpjGtPqCBObRzmg/file?c_luid=3565984f' -o /tmp/ev-market/05-market-shift.png
+          echo '4155daa7de2a44289674c603886fca72ee82a259c17c7bd40d5c475e7bb2359b  /tmp/ev-market/05-market-shift.png' | sha256sum -c -
+          cp /tmp/ev-market/*.png 2026-09/ev-market-20260928/
+      - name: Commit verified assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'qltlf001-creator'
+          git config user.email 'qltlf001@gmail.com'
+          git add 2026-09/ev-market-20260928
+          git commit -m 'Publish EV market visuals via Dropbox relay'
+          git push
