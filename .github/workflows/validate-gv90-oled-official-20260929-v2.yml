@@ -17,8 +17,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl -fL --retry 2 --connect-timeout 20 'https://uc5fadedeb7b47ecd3ffe8fb4e28.dl.dropboxusercontent.com/cd/0/get/DJCm9vIWEwc45xEE9vbopHVmmsxsdTC9hnBxiB4mVJhmcbzuCOHnmWHZWdqwDmkkXMwua-MWw-6C7aNUhMQv_7EkavLfWyljU_LNInZ8OEOJRMoyd2guwPRlPRFJTTIrXmqBCh5tItrC26qWCGRBZssGRmCn-j-exM7X4tZDxVV5KQ/file?c_luid=3565984f' -o validation-pack.zip
-          echo '09e4aed99f84ff5af1048df0c8a72354c5b0a831f3433917bf4ad00cf2583644  validation-pack.zip' | sha256sum -c -
+          curl -fL --retry 2 --connect-timeout 20 'https://uc571ca4453d7b600c7ee1d8e4a7.dl.dropboxusercontent.com/cd/0/get/DJCX4grWCSffbS-3MLdiRAjl6H8S3F1zVUrHJV4KWZZkS3hELGfJMKcOXQVCxz1hN3hFxFkG0rPbDV395JVrAyb5viyvP_F6mO3bCiFx_Svtx6EQqXJjTUYD57het-j3cVLG39ohS0xc0wuaqLjwYV-7nRPIsYN7eLCPrCvkjlkWnw/file?c_luid=3565984f' -o validation-pack.zip
+          echo '140e51afa7a12e1c969815cae918a8df42e768b191e6fbae152b3d4a6c040a8d  validation-pack.zip' | sha256sum -c -
           rm -rf .validation-work
           mkdir -p .validation-work/pack .validation-work/src
           unzip -q validation-pack.zip -d .validation-work/pack
