@@ -1,0 +1,76 @@
+name: Scrape GV90 official photos fast
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/scrape-gv90-official-fast-20260929.yml'
+permissions:
+  contents: read
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests beautifulsoup4 pillow
+      - name: Download official media
+        run: |
+          python - <<'PY'
+          import os, io, json, hashlib
+          from urllib.parse import urljoin
+          import requests
+          from bs4 import BeautifulSoup
+          from PIL import Image,ImageOps,ImageDraw
+          H={'User-Agent':'Mozilla/5.0'}
+          pages=[
+           ('flagship','https://newsroom.genesis.com/a-new-icons-arrival-genesis-unveils-gv90-flagship-suv/'),
+           ('theater','https://newsroom.genesis.com/redefining-space-with-the-genesis-gv90s-luxury-home-theater/'),
+           ('preview','https://newsroom.genesis.com/genesis-gv90-exclusive-preview-a-new-vision-of-luxury-inspired-by-the-moon-jar/')]
+          out='gv90-official-fast';os.makedirs(out,exist_ok=True)
+          items=[]; seen=set(); hashes=set()
+          for label,page in pages:
+            html=requests.get(page,headers=H,timeout=12).text
+            soup=BeautifulSoup(html,'html.parser')
+            urls=[]
+            for im in soup.find_all('img'):
+              alt=(im.get('alt') or '').strip()
+              ss=im.get('srcset') or im.get('data-srcset') or ''
+              if ss:
+                vals=[x.strip().split()[0] for x in ss.split(',') if x.strip()]
+                if vals: urls.append((urljoin(page,vals[-1]),alt))
+              for a in ('data-src','src','data-original','data-lazy-src'):
+                u=im.get(a)
+                if u: urls.append((urljoin(page,u),alt))
+            count=0
+            for u,alt in urls:
+              if u in seen: continue
+              seen.add(u)
+              if count>=10: break
+              try:
+                r=requests.get(u,headers=H,timeout=8)
+                if r.status_code!=200 or len(r.content)<100000: continue
+                h=hashlib.sha256(r.content).hexdigest()
+                if h in hashes: continue
+                im=Image.open(io.BytesIO(r.content)).convert('RGB')
+                if im.width<1200 or im.height<675: continue
+                hashes.add(h); count+=1
+                fn=f'{len(items)+1:02d}-{label}.jpg'; im.save(os.path.join(out,fn),quality=94,optimize=True)
+                items.append({'file':fn,'label':label,'alt':alt,'source_url':u,'page':page,'width':im.width,'height':im.height,'sha256':h})
+              except Exception as e: print('skip',u,e)
+          with open(os.path.join(out,'manifest.json'),'w') as f: json.dump(items,f,ensure_ascii=False,indent=2)
+          thumbs=[]
+          for i,r in enumerate(items,1):
+            im=Image.open(os.path.join(out,r['file'])).convert('RGB')
+            im=ImageOps.fit(im,(480,270),method=Image.Resampling.LANCZOS)
+            c=Image.new('RGB',(480,315),'white');c.paste(im,(0,0));d=ImageDraw.Draw(c);d.text((10,278),f"{i:02d} {r['label']} {r['width']}x{r['height']}",fill='black');thumbs.append(c)
+          cols=3; rr=(len(thumbs)+cols-1)//cols
+          sheet=Image.new('RGB',(1440,max(315,rr*315)),(235,235,235))
+          for i,t in enumerate(thumbs):sheet.paste(t,((i%3)*480,(i//3)*315))
+          sheet.save(os.path.join(out,'contact-sheet.jpg'),quality=90)
+          print('COUNT',len(items))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gv90-official-fast
+          path: gv90-official-fast
+          retention-days: 1
