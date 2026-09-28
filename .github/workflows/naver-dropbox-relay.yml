@@ -1,0 +1,33 @@
+name: Canonical Dropbox to GitHub Asset Relay
+on:
+  workflow_dispatch:
+    inputs:
+      relay_payload:
+        description: 'JSON: directory_token and five completed Dropbox assets (source_url, sha256, dropbox_size, dropbox_file_id, dropbox_upload_status, target_path)'
+        required: true
+        type: string
+permissions:
+  contents: write
+concurrency:
+  group: naver-blog-image-main
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Verify Dropbox originals, publish to main, verify metadata and raw bytes
+        env:
+          RELAY_PAYLOAD: ${{ inputs.relay_payload }}
+          GH_TOKEN: ${{ github.token }}
+          RELAY_RECEIPT_PATH: github_main_receipt.json
+        run: python3 .github/scripts/github_dropbox_relay.py
+      - name: Preserve main metadata receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-main-receipt
+          path: github_main_receipt.json
+          if-no-files-found: error
