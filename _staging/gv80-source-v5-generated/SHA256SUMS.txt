@@ -1,0 +1,5 @@
+143852cb1d1f90799c20f9ad49cfa46320f4148e7c634999d25e8a57f179cc05  _staging/gv80-source-v5-generated/01-homefeed.jpg
+884c88a99537aac27133b09a4b7f94e6c7a621e213ec3a5ad517b7c06085db29  _staging/gv80-source-v5-generated/02-launch.jpg
+a3cba7bebc372e0a32661f21d9bae2281e9b99ed605eb31e81a69ea40bc583fc  _staging/gv80-source-v5-generated/03-price.jpg
+682247f7243c1699ba1cc27e37b03f9336a24dff0f2ae89443aeab5e393ce484  _staging/gv80-source-v5-generated/04-efficiency.jpg
+ff2b20c086a96ddc7bd3e6b77b08e8e9ea00f30cd27a63b751950a2c742d24a3  _staging/gv80-source-v5-generated/05-specs.jpg
