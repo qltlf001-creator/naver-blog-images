@@ -1,0 +1,36 @@
+name: Relay GV80 Hybrid 20260928 v1
+on:
+  push:
+    branches: [main]
+    paths:
+      - '_relay/gv80-hybrid-20260928-v1/READY'
+permissions:
+  contents: write
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download GV80 Hybrid assets from Dropbox and verify SHA256
+        shell: bash
+        env:
+          U1B64: 'aHR0cHM6Ly91Y2RjNTc3NjhhMDgyZTQ1ZmM1MTgyMjE5NWZlLmRsLmRyb3Bib3h1c2VyY29udGVudC5jb20vY2QvMC9nZXQvREktN1N5azZsZjA4eTk3OUIzTmZvZ2hWR2QzcDU4WHNzZFlEUkgwV1licnZyQ3VhM1BqaEtObzBqN1kxbmF5VXRCQUJXY29zLV9fbDhsMDkyZktuTDFwZlZvWC10WVZrOWZfai1GTmsyYW9KLXVUQTdiTVoyQjM2UkJJa0MyRG5kRHpPWGFQUWtfc3k3TVh5bkJLRDZlWnU4WG5Qc3hCdmg4d05JMURsVnZKcUxRL2ZpbGU/Y19sdWlkPTM1NjU5ODRm'
+          U2B64: 'aHR0cHM6Ly91Y2QzNTkyZjE4NTg2NTU0NTVlZmJiZThlMjVkLmRsLmRyb3Bib3h1c2VyY29udGVudC5jb20vY2QvMC9nZXQvREktZ2tyeEl5a3M2QURLcEdwOVgxVkMzOEhJQUM0QW1TLVhTVHBHdUh6eE9ENWlzbEFnTGRwV0k2djRreEpjV1FYdTh2V1UzcGkyLXc0V01ZVmRQbnNjN2lCcE55eTBrejdqMXFfbXRseG8tZ005TmJsMVB2TlJhNDYtZ3IweExKYzdQbUFtTkFfQVZORVBPaldjaVNaVDVvM2NzZ2duNnlybHhZS1FHVTBBc0FnL2ZpbGU/Y19sdWlkPTM1NjU5ODRm'
+          U3B64: 'aHR0cHM6Ly91YzA1Zjk0NWUwZTM0NTIyMTFhNGIzNTE3ZjU2LmRsLmRyb3Bib3h1c2VyY29udGVudC5jb20vY2QvMC9nZXQvREktUlBUcDVkY2xHTVZ6S004eWNOMVN0Rm1td1VnN3dqOWJiQ3NjSWFJZkZvbllfVEZQWkVBWUdxOTNFb1o2dmhVNWtCZE1zc0FlY25YY1dlWXUxTnpHZ1RLcVA2cEV1LVZQeWpySkttb1pLYzJROVI5VzJFempzWHQxQ3ZfMV8xOWxWbExTbU9BeDdHejJnRTFiaUdNX0RkU201UlQ3ODFmbWVDcVk5emVBSU1RL2ZpbGU/Y19sdWlkPTM1NjU5ODRm'
+          U4B64: 'aHR0cHM6Ly91Y2RiMmZmYjU2NGUyZDAyZmE5NGY5OTNjNDRhLmRsLmRyb3Bib3h1c2VyY29udGVudC5jb20vY2QvMC9nZXQvREk4bW0yV0lMVXNLUE5lZ05PaXg1ODNHaTJscXRsblUyRExURDBacndodnpjV3ZXNVlyNktwcy13NkdZQVZXZkFoVWxjd3dTeDYyMVhmV1NoUVRRTjg4dkJHOTNjMk53OEU0a2p4dGpyUGh6b3JheXhqWUVhdHFpYTdQOTNjYTRJcEVNWDcwQzdwcXZEZnZlRml1b01OSHBldlRCLVNGQjhsQV91dWFBSk9NYTJRL2ZpbGU/Y19sdWlkPTM1NjU5ODRm'
+          U5B64: 'aHR0cHM6Ly91Yzg4YjRlNmNlOWE1YzJjNzBlN2ZmMWUzYzkwLmRsLmRyb3Bib3h1c2VyY29udGVudC5jb20vY2QvMC9nZXQvREk5cm9DMzd2ZVZ6LS1oYTZwQ3BWQWNOZkhGNkQzdUZQM2wtQUkxNWlsSkJ4REt6SjFtRUxEZDQ5U0pHWVJJaVBmcGo1SjI0WXNITi10OWVwYUxoNzUwYzQ4S0ZkYkhaaWxxMWlEVHVITEdyYUsyQndHOTFYSXJOOUZDM00zd3MtRFNOT3RnTVJrUzg4U0J4U2toei1qR3g0X3I2MHBCLWE1NzZkUzYzUmp5Nzh3L2ZpbGU/Y19sdWlkPTM1NjU5ODRm'
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/gv80-hybrid 2026-09/gv80-hybrid-20260928-v1
+          for n in 1 2 3 4 5; do eval "U=\$(printf '%s' \"\$U${n}B64\" | base64 -d)"; case $n in 1) f=01-homefeed.jpg; sha=7e529644ea640807772928b4fb947f7621dd64fadca0a8295c6e028e388f0a57;; 2) f=02-launch-timeline.jpg; sha=0dc81128e9e0f2e9bd6ba176494c4aab42ad2b4ea8e88213a498f2f4ea8d1b8a;; 3) f=03-price-gap.jpg; sha=4e66599646d3a01e706279b5ddb6fc8ab27a3610ceb7a5cfb2decaf3483ca340;; 4) f=04-efficiency-25.jpg; sha=589aab2be58f4038bb2d15fe715853b7f2def4f2d2282fe02b62052d5b968dd2;; 5) f=05-powertrain.jpg; sha=79cdc793af1e6eb350798cce75db1f08023ed81e99e82b6c9dc30d64c6ea160a;; esac; curl --fail --location --silent --show-error "$U" -o "/tmp/gv80-hybrid/$f"; echo "$sha  /tmp/gv80-hybrid/$f" | sha256sum -c -; done
+          cp /tmp/gv80-hybrid/*.jpg 2026-09/gv80-hybrid-20260928-v1/
+      - name: Commit GV80 Hybrid assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'qltlf001-creator'
+          git config user.email 'qltlf001@gmail.com'
+          git add 2026-09/gv80-hybrid-20260928-v1
+          git rm -f _relay/gv80-hybrid-20260928-v1/READY
+          git commit -m 'Publish GV80 Hybrid visual set 20260928 v1'
+          git push
