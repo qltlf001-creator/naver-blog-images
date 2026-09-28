@@ -1,0 +1,30 @@
+name: Publish GV80 Independent V9
+on:
+  push:
+    paths:
+      - '_staging/gv80-independent-v9-ready.txt'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download exact Dropbox originals
+        run: |
+          set -euo pipefail
+          mkdir -p 2026-09/gv80-hybrid-independent-v9
+          curl -fL 'https://ucb31869a3cfec3d1b7b815ed298.dl.dropboxusercontent.com/cd/0/get/DI_3rLccPr88RpyKwFKcQnjJqIpdtpRjOTasKbzyacrBJqIlDTl_GnvALf714TS86miMCYi5SdaolRNwrktqW3jGI7M21_S8qBE2IxvRqGktPKQUVyoEg57iqAJOWUKOTXVgyiGmvi1KFlH9q0F853yHkQazTBEW1yi_iFyMuLJzvg/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v9/01-homefeed.jpg
+          curl -fL 'https://uc5576da4facc23325c6a9e5da63.dl.dropboxusercontent.com/cd/0/get/DI9I398Gpbtm5oL4kASeFns8k8VolGgMcFSMxvIPbmrNxw6cJweYiEqalDstDC95swSL7GknJttSC0V451cJWq_9Yneu7jNb8Sy-JYeHCW1-gZGbnfQec5ZbS92PZfVMz5gNPFtIqaVmfjNkX98spcIulaL7Y6gZnI0Mv48QbP8oTA/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v9/02-launch.jpg
+          curl -fL 'https://ucaf89b55e1f9c4e996c8dba9448.dl.dropboxusercontent.com/cd/0/get/DI83WHRFQvOOVOtPlDEN8MVFk0D0RUIzNh4CRfkkt-RVy47AMk3dizBL5q_B_aE3xY3_kEbD4J_tmSrA5iW0AfKAzX76zpK0TyyvRhrl1oKyG6VqjEarTbnL_8twVzVytQuqtQdmKQMa0jOWveNY4lyae-1Tifm0BgF_9nVqj1MmjQ/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v9/03-price.jpg
+          curl -fL 'https://uc82b742580521698188bb217bd5.dl.dropboxusercontent.com/cd/0/get/DI8WqTcy0KlKiRl-y4igRNKsQrV7wJHHoSSO3W6WOLln7cKI0TahWZoM-myWWvEizj3DP9tEgYgzFWZA5ERHssmcvuinUIhNhtYZGVlSqaOWnlcDWD2c7zb3QM40YgkuL_ReVljCW5_ImsQ8uNALRWGo0HXfPgOJnQgBd1cNfbLlyw/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v9/04-efficiency.jpg
+          curl -fL 'https://ucb710366db635a2b55bf391ae50.dl.dropboxusercontent.com/cd/0/get/DI9gy09GCpMvP_RMVOe1LUcOTzcJmHdFroC5pWlMNH-cbn0-JHKGJq52PEMu2DTwCXcafLZ22cVM73yZV6l2C885lxGi_CbQE2X5bU66PxfmklAuztv7iZn9T8O1OWdtkxaD90KvyWGGQBX3ozOh14msjojk8DrcHUtUU111ScLbGw/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v9/05-specs.jpg
+          test $(find 2026-09/gv80-hybrid-independent-v9 -type f -name '*.jpg' | wc -l) -eq 5
+          sha256sum 2026-09/gv80-hybrid-independent-v9/*.jpg
+      - name: Commit JPG assets
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 2026-09/gv80-hybrid-independent-v9/*.jpg
+          git commit -m 'Publish GV80 independent V9 JPG assets'
+          git push
