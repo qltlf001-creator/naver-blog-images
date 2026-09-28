@@ -1,0 +1,32 @@
+name: Publish GV80 V9 Independent Images
+on:
+  push:
+    branches: [main]
+    paths:
+      - '_trigger/gv80-v9-independent.txt'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download exact Dropbox originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p 2026-09/gv80-hybrid-independent-v9
+          curl -L --fail --silent --show-error 'https://ucb362235560ad286b2d3bf8b6d8.dl.dropboxusercontent.com/cd/0/get/DI-IcUT1_7ziO3a1FY9czIQWLsdN5klVHKOb34gZgGM0_spkYihgC-Gg7oveXTk8aoWNr1l59l8MlQvARtawUrXd6f9PeI17O9KsII41NvWz8pi_GmJVGp4AfHd0ak7dDgcZVhECg3e11OEcHMSoGxS95vZqPzm8_8D4DrNRnr178w/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v9/01-homefeed.jpg
+          curl -L --fail --silent --show-error 'https://uc361f6648d8f9e64ed9f0d8e57f.dl.dropboxusercontent.com/cd/0/get/DI_UjscSKdxoSlniNdqF_2WCm3bCk6e5TOMGXqfuziXwNyBDRKPX9Q7I_QCkM3CNj_OyBvSk35W_tGPRL2SHtgir0zeKmvALue61U8hsQt0EPzv929CavvptnShOV75d3liDxSuejvopCNSjgGi0u2Tm87zkCfm0Z20e3qyoqN8uXg/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v9/02-launch.jpg
+          curl -L --fail --silent --show-error 'https://ucc410e3c901631b4c10aab39e8a.dl.dropboxusercontent.com/cd/0/get/DI_T2gGvJ2juk3JB-94m3miA8oZ6ltCTkHao-ck9ChVcLp1oesPkrDqZZfgkmKw059RDdDK53dsphCDvsGyGURmIn_VeTI1CYRGNP3T4LgeeJNASeIMYdgg5-9M6PzKLjNxTKbCZ-4jMdZVu0tFzOu-0XJuD-Mfk8TnZ-d6C2vEwlA/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v9/03-price.jpg
+          curl -L --fail --silent --show-error 'https://ucb5fd58a3c704e8bba9802e4ad4.dl.dropboxusercontent.com/cd/0/get/DI-YS6SN1DnqNMKPdHRxD4l1Mv7qz4qVyn_hcMcKvNWVnuPgeZ6sLZxJZ_QBAc6Yf5CxvPnyt7PbjNbEDJBma_dbmtz6FZjVq5w7qTKTCS3eorDXitkuEeKmuYa7B9kaM7EmAp69_V-5_Q60lHoS85bObBTEwOxB0PDj_XF4c774-g/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v9/04-efficiency.jpg
+          curl -L --fail --silent --show-error 'https://uc1341f5ee5fd2d9c151da5a3777.dl.dropboxusercontent.com/cd/0/get/DI95-t3EGdcpEchXU24d693tCwXs81h1OrFuD7oCNHvZf7GlCxIpQkY0jUdUSlL2oKjywALx52AVkBCNriSON9Jf-8GxBGnMPhooMISWKSht4qKOyAEVu-T754cqkUlLKI-KWeP47GvxKXPtTtJgZFwVIScRA4uz0YzZgESw1XKWRg/file?c_luid=3565984f' -o 2026-09/gv80-hybrid-independent-v9/05-specs.jpg
+          sha256sum 2026-09/gv80-hybrid-independent-v9/*.jpg > 2026-09/gv80-hybrid-independent-v9/SHA256SUMS.txt
+      - name: Commit exact JPG assets
+        shell: bash
+        run: |
+          git config user.name 'qltlf001-creator'
+          git config user.email 'qltlf001@gmail.com'
+          git add 2026-09/gv80-hybrid-independent-v9
+          git commit -m 'Publish GV80 independent V9 JPG assets'
+          git push
