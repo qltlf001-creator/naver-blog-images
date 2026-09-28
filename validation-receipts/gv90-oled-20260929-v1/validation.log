@@ -1,0 +1,530 @@
+PASS: root max-width 760px
+PASS: root font-size 17px
+PASS: root line-height 1.9
+PASS: root font-weight 400
+PASS: root word-break keep-all
+PASS: PATCH2 root white background #fff
+PASS: PATCH2 root/dark text color #222 present
+PASS: PATCH2 no visible HTML white text color declarations: 0
+PASS: no <strong> tags (paste-safe emphasis uses closed span)
+PASS: PATCH4 no paragraph rhythm dependent on styled <p>: 0
+PASS: PATCH4 paste-safe <br><br> paragraph gaps >=12: 42
+INFO: selective emphasis span count = 32
+PASS: active selective emphasis present: 32
+PASS: selective emphasis not excessive: 32
+PASS: PATCH4 ASSET_PIPELINE:GITHUB_PUBLIC metadata present
+PASS: PATCH4 convergence render profile metadata present
+PASS: no internal planning markers in final HTML
+PASS: publish-ready HTML has no unresolved placeholders: 0
+PASS: no editor/work-instruction comments in final HTML: 0
+PASS: body visible text minimum 3000 chars: 3570
+PASS: no body H1 by default (NAVER_TITLE copy line is outside HTML body)
+PASS: PATCH3 KEYWORD_PLAN metadata present
+PASS: PATCH3 MAIN and DETAIL keywords are non-empty
+PASS: PATCH3 MAIN and DETAIL keywords are distinct
+PASS: PATCH3 MAIN keyword distributed at least twice: 27
+PASS: PATCH3 DETAIL keyword distributed at least twice: 4
+PASS: PATCH3 MAIN+DETAIL exact bundle not repeated in body: 1
+PASS: DIRECT ANSWER card present
+PASS: PATCH5 DIRECT ANSWER uses full-width block div callout
+PASS: PRIMARY INSTANT ANSWER marker present before DIRECT ANSWER
+PASS: instant answer region is concise and substantive: 218 chars
+WARN: instant-answer opening has active bold anchors: 0
+WARN: instant-answer opening has semantic color anchor: 0
+PASS: editorial neutral/warm callout color present
+PASS: editorial accent/rule present
+PASS: lead-first intro exists before DIRECT ANSWER: 218 chars
+PASS: PATCH2 THUMBNAIL_HOME present before DIRECT ANSWER
+PASS: PATCH2 THUMBNAIL_HOME marker maps to image before DIRECT ANSWER
+PASS: PATCH5 DIRECT ANSWER uses zero outer margin; explicit BR owns section spacing
+PASS: DIRECT ANSWER uses narrative paragraph rhythm: 3 double-breaks
+PASS: DIRECT ANSWER avoids stacked micro-label list: 0 short bold labels
+WARN: DIRECT ANSWER uses active emphasis anchors: 2
+PASS: DIRECT ANSWER uses semantic color anchors: 2
+INFO: image count = 5
+PASS: PATCH2 at least 5 images: homefeed hero 1 + body visuals 4
+PASS: image 1 has resolved non-placeholder src
+PASS: PATCH2 image 1 uses public HTTPS src
+PASS: image 2 has resolved non-placeholder src
+PASS: PATCH2 image 2 uses public HTTPS src
+PASS: image 3 has resolved non-placeholder src
+PASS: PATCH2 image 3 uses public HTTPS src
+PASS: image 4 has resolved non-placeholder src
+PASS: PATCH2 image 4 uses public HTTPS src
+PASS: image 5 has resolved non-placeholder src
+PASS: PATCH2 image 5 uses public HTTPS src
+PASS: image 1 meaningful ALT
+PASS: image 2 meaningful ALT
+PASS: image 3 meaningful ALT
+PASS: image 4 meaningful ALT
+PASS: image 5 meaningful ALT
+PASS: PATCH2 first image/homefeed hero appears before first H2
+PASS: PATCH2 THUMBNAIL_HOME marker appears before first H2
+PASS: PATCH2 configured GitHub raw asset present: 5
+PASS: PATCH4 image/source caption-like 14px #777 blocks: 6
+INFO: H2 count = 6
+PASS: at least 3 H2 sections for long-form editorial rhythm
+PASS: H2 1 exact 24px/1.5/800 style
+PASS: H2 1 uses margin:0 because explicit BR owns section spacing
+PASS: H2 2 exact 24px/1.5/800 style
+PASS: H2 2 uses margin:0 because explicit BR owns section spacing
+PASS: H2 3 exact 24px/1.5/800 style
+PASS: H2 3 uses margin:0 because explicit BR owns section spacing
+PASS: H2 4 exact 24px/1.5/800 style
+PASS: H2 4 uses margin:0 because explicit BR owns section spacing
+PASS: H2 5 exact 24px/1.5/800 style
+PASS: H2 5 uses margin:0 because explicit BR owns section spacing
+PASS: H2 6 exact 24px/1.5/800 style
+PASS: H2 6 uses margin:0 because explicit BR owns section spacing
+INFO: H3 count = 0
+PASS: body image wrapper 1 uses 28px top / 0 bottom spacing
+PASS: body image wrapper 2 uses 28px top / 0 bottom spacing
+PASS: body image wrapper 3 uses 28px top / 0 bottom spacing
+PASS: body image wrapper 4 uses 28px top / 0 bottom spacing
+PASS: body image wrapper 5 uses 28px top / 0 bottom spacing
+PASS: H2 pre-gap explicit <br><br>: 6/6
+PASS: H2 -> body exactly one explicit <br>: 6/6
+PASS: no H2 -> body double <br><br> gaps: 0
+PASS: PATCH5 CORE QUOTE marker count 1-5: 4
+PASS: each CORE QUOTE marker maps to blockquote: 4/4
+PASS: CORE QUOTE 1 concise independent text: 86 chars
+PASS: CORE QUOTE 2 concise independent text: 57 chars
+PASS: CORE QUOTE 3 concise independent text: 66 chars
+PASS: CORE QUOTE 4 concise independent text: 74 chars
+PASS: no image/infographic block closes directly into H2 without explicit gap: direct=0, spaced=1
+PASS: image-gap H2 1 has zero CSS margin to avoid duplicate whitespace
+PASS: image-gap H2 2 has zero CSS margin to avoid duplicate whitespace
+INFO: table count = 0
+PASS: PATCH5 no table-based callouts/data tables in golden render: 0
+INFO: golden callout div count = 4
+PASS: PATCH5 at least 3 full-width callout divs: 4
+PASS: callout div 1 full-width 100% border-box
+PASS: callout div 1 left aligned
+PASS: callout div 1 uses 1.95 line-height
+PASS: callout div 1 has no narrowed legacy width
+PASS: callout div 1 semantic emoji restrained: 0
+PASS: callout div 2 full-width 100% border-box
+PASS: callout div 2 left aligned
+PASS: callout div 2 uses 1.95 line-height
+PASS: callout div 2 has no narrowed legacy width
+PASS: callout div 2 semantic emoji restrained: 0
+PASS: callout div 3 full-width 100% border-box
+PASS: callout div 3 left aligned
+PASS: callout div 3 uses 1.95 line-height
+PASS: callout div 3 has no narrowed legacy width
+PASS: callout div 3 semantic emoji restrained: 0
+PASS: callout div 4 full-width 100% border-box
+PASS: callout div 4 left aligned
+PASS: callout div 4 uses 1.95 line-height
+PASS: callout div 4 has no narrowed legacy width
+PASS: callout div 4 semantic emoji restrained: 0
+PASS: PATCH5 first callout forbids generic title: 먼저 흐름부터 잡으면
+PASS: PATCH5 first callout forbids generic title: 핵심만 보면
+PASS: PATCH5 first callout forbids generic title: 정리하면
+PASS: PATCH5 distributed blockquotes 3-5: 4
+INFO: body semantic emphasis red/blue/green = 9 5 2
+PASS: body has active semantic color emphasis: 16
+PASS: body semantic color emphasis not excessive: 16
+PASS: flow-marker emphasis present for long-form readability: 8
+PASS: flow-marker emphasis not excessive: 8
+INFO: ordinary-body bold / semantic-color = 24 13
+PASS: ordinary body uses active bold anchors: 24
+PASS: ordinary body bold anchors not excessive: 24
+PASS: ordinary body uses semantic-color anchors: 13
+PASS: ordinary body semantic-color anchors not excessive: 13
+PASS: H2 section 1 has at least 2 emphasis anchors: 4
+PASS: H2 section 1 emphasis not crowded: 4
+PASS: H2 section 2 has at least 2 emphasis anchors: 4
+PASS: H2 section 2 emphasis not crowded: 4
+PASS: H2 section 3 has at least 2 emphasis anchors: 4
+PASS: H2 section 3 emphasis not crowded: 4
+PASS: H2 section 4 has at least 2 emphasis anchors: 5
+PASS: H2 section 4 emphasis not crowded: 5
+PASS: H2 section 5 has at least 2 emphasis anchors: 3
+PASS: H2 section 5 emphasis not crowded: 3
+PASS: H2 section 6 has at least 2 emphasis anchors: 4
+PASS: H2 section 6 emphasis not crowded: 4
+INFO: semantic emoji count = 0
+PASS: semantic emoji not excessive: 0
+PASS: FINAL SUMMARY uses narrative recovery rhythm: 2 double-breaks
+PASS: FINAL SUMMARY avoids stacked micro-label list: 0 short bold labels
+INFO: ordinary body paragraph count = 26
+PASS: no ordinary body paragraph over 360 visible chars: 0
+PASS: ordinary body paragraphs over 260 chars should be rechecked: 0
+PASS: ordinary body paragraph average <=220 chars: 91.0
+PASS: paragraph density supports long-form readability: 26 >= 10
+PASS: no 3+ consecutive ultra-short ordinary paragraphs: max run 0
+WARN: ENGAGEMENT HOOK present for general home/feed post
+PASS: no pressure-style engagement CTA: 0
+PASS: no exact repeated substantive sentences: 0
+PASS: no highly near-duplicate body paragraphs: 0
+PASS: near-duplicate paragraph pairs limited: 0
+PASS: H2 titles are lexically distinct: 0 similar pairs
+INFO: DIRECT ANSWER vs FINAL SUMMARY lexical overlap = 0.084
+PASS: FINAL SUMMARY is not a recap of DIRECT ANSWER: overlap=0.08
+PASS: generic evaluative filler not over-repeated: 4
+PASS: no obvious long-token keyword stuffing: 0 heavy tokens
+WARN: source panel present
+PASS: no fabricated first-person experience
+PASS: accent red not overused: 9
+PASS: div tags balanced
+WARNINGS: 5
+PASS: article HTML exists
+PASS: separate preview HTML exists
+PASS: preview is a separate file from article HTML
+PASS: article max-width 760px
+PASS: article 17px/1.9/400
+PASS: article dark text / white background
+PASS: exactly 5 rendered images: 5
+PASS: all images use configured GitHub raw host
+PASS: five image URLs are unique
+PASS: final article contains zero tables: 0
+PASS: at least 3 1.95 callout divs: 4
+PASS: callout 1 block/full-width/border-box/left
+PASS: callout 2 block/full-width/border-box/left
+PASS: callout 3 block/full-width/border-box/left
+PASS: callout 4 block/full-width/border-box/left
+PASS: generic first-callout phrase absent: 먼저 흐름부터 잡으면
+PASS: generic first-callout phrase absent: 핵심만 보면
+PASS: generic first-callout phrase absent: 정리하면
+PASS: blockquote count 3-5: 4
+PASS: preview copy-body button exists
+PASS: preview select-all button exists
+PASS: preview title-copy button exists
+PASS: actual rendered article DOM target exists
+PASS: three toolbar copy actions exist
+PASS: Range selects actual article DOM
+PASS: window selection API used
+PASS: execCommand copy fallback path exists
+PASS: manual selection fallback messaging exists
+PASS: preview contains resolved naver-article-sha256 meta
+PASS: preview SHA-256 binding matches exact article bytes
+PASS: preview declares exact embedded payload binding mode
+PASS: preview declares PATCH10 runtime-safe direct DOM mode
+PASS: preview runtime workaround absent: iframe
+PASS: preview runtime workaround absent: srcdoc
+PASS: preview runtime workaround absent: base64/data image
+PASS: preview runtime workaround absent: blob URL
+PASS: preview runtime workaround absent: dual local/remote src swap
+PASS: preview runtime workaround absent: local container path
+PASS: preview runtime workaround absent: sandbox URL
+PASS: preview has exactly one article payload start/end marker
+PASS: preview embedded article payload bytes exactly equal article file bytes
+PASS: preview embedded payload SHA-256 equals article SHA-256
+PASS: preview template placeholders fully resolved
+PASS: preview renders article image URL: 01-homefeed.jpg
+PASS: preview renders article image URL: 02-display.jpg
+PASS: preview renders article image URL: 03-pleos.jpg
+PASS: preview renders article image URL: 04-durability.jpg
+PASS: preview renders article image URL: 05-theater.jpg
+PASS: preview image src sequence exactly equals article image src sequence
+PASS: preview declares immutable Golden copy contract id
+PASS: preview has exactly one canonical copy algorithm marker pair
+PASS: canonical Golden copy algorithm file exists
+PASS: preview copy algorithm bytes equal canonical GOLDEN_COPY_ALGORITHM_V1.js
+COPY_ALGORITHM_LOCK=PASS
+PREVIEW_BINDING_PASS=YES
+GOLDEN_RESULT=PASS
+PASS: article HTML exists
+PASS: asset identity manifest exists
+PASS: CURRENT_ASSET_SET file exists
+PASS: CURRENT_ASSET_SET schema validation PASS
+PASS: CURRENT_ASSET_SET project version PATCH10
+PASS: CURRENT_ASSET_SET sealed CURRENT and invalidates prior sets
+PASS: CURRENT_ASSET_SET copy contract is Golden immutable contract
+PASS: CURRENT_ASSET_SET has exactly 5 assets: 5
+PASS: CURRENT_ASSET_SET asset_origin_mode valid
+PASS: CURRENT_ASSET_SET independent_asset_count=5
+PASS: CURRENT_ASSET_SET independent mode has no derivative parent
+PASS: CURRENT_ASSET_SET five unique independent_source_id values
+PASS: CURRENT_ASSET_SET no crop/derivative lineage in independent mode
+PASS: manifest schema NAVER_ASSET_IDENTITY_MANIFEST_V2
+PASS: manifest transport_policy DROPBOX_TO_GITHUB_ALWAYS
+PASS: manifest publication_branch is main
+PASS: manifest Dropbox complete count 5
+PASS: manifest GitHub main metadata count 5
+PASS: manifest URL resolution uses GitHub contents metadata
+PASS: manifest preview runtime mode canonical
+PASS: manifest asset_set_id == CURRENT_ASSET_SET
+PASS: manifest asset_set_revision == CURRENT_ASSET_SET revision
+PASS: manifest/current copy contract immutable id matches
+PASS: manifest GitHub directory token == CURRENT_ASSET_SET
+PASS: manifest current_asset_set_sha256 matches current file bytes
+PASS: manifest current_asset_set_file resolves to supplied current set
+PASS: manifest has exactly 5 assets: 5
+PASS: article has exactly 5 image src values: 5
+PASS: asset 1 role order/prefix: 01-homefeed
+PASS: asset 1 role == CURRENT_ASSET_SET role
+PASS: asset 1 configured GitHub raw download_url
+PASS: asset 1 URL uses CURRENT GitHub directory token (reject old asset folder)
+PASS: asset 1 manifest SHA-256 is resolved 64 hex
+PASS: asset 1 manifest SHA == CURRENT_ASSET_SET SHA
+PASS: asset 1 mandatory transport_chain dropbox->github
+PASS: asset 1 Dropbox upload completed
+PASS: asset 1 Dropbox file_id receipt present
+PASS: asset 1 Dropbox path receipt present
+PASS: asset 1 Dropbox size receipt > 0: 361823
+PASS: asset 1 Dropbox content_hash receipt is 64 hex
+PASS: asset 1 Dropbox live verification URL host is Dropbox
+PASS: asset 1 GitHub import SHA-256 verified flag true
+PASS: asset 1 GitHub main contents metadata verified flag true
+PASS: asset 1 source format is jpg/png
+PASS: asset 1 authoritative original path == CURRENT_ASSET_SET original path
+PASS: asset 1 authoritative original exists: /home/runner/work/naver-blog-images/naver-blog-images/.validation-work/pack/run/assets/01-homefeed.jpg
+PASS: asset 1 authoritative original SHA-256 matches manifest/current set
+PASS: asset 1 Dropbox receipt size == authoritative original size
+PASS: asset 1 Dropbox content_hash == locally computed authoritative-original Dropbox hash
+PASS: asset 2 role order/prefix: 02-display
+PASS: asset 2 role == CURRENT_ASSET_SET role
+PASS: asset 2 configured GitHub raw download_url
+PASS: asset 2 URL uses CURRENT GitHub directory token (reject old asset folder)
+PASS: asset 2 manifest SHA-256 is resolved 64 hex
+PASS: asset 2 manifest SHA == CURRENT_ASSET_SET SHA
+PASS: asset 2 mandatory transport_chain dropbox->github
+PASS: asset 2 Dropbox upload completed
+PASS: asset 2 Dropbox file_id receipt present
+PASS: asset 2 Dropbox path receipt present
+PASS: asset 2 Dropbox size receipt > 0: 132835
+PASS: asset 2 Dropbox content_hash receipt is 64 hex
+PASS: asset 2 Dropbox live verification URL host is Dropbox
+PASS: asset 2 GitHub import SHA-256 verified flag true
+PASS: asset 2 GitHub main contents metadata verified flag true
+PASS: asset 2 source format is jpg/png
+PASS: asset 2 authoritative original path == CURRENT_ASSET_SET original path
+PASS: asset 2 authoritative original exists: /home/runner/work/naver-blog-images/naver-blog-images/.validation-work/pack/run/assets/02-display.jpg
+PASS: asset 2 authoritative original SHA-256 matches manifest/current set
+PASS: asset 2 Dropbox receipt size == authoritative original size
+PASS: asset 2 Dropbox content_hash == locally computed authoritative-original Dropbox hash
+PASS: asset 3 role order/prefix: 03-pleos
+PASS: asset 3 role == CURRENT_ASSET_SET role
+PASS: asset 3 configured GitHub raw download_url
+PASS: asset 3 URL uses CURRENT GitHub directory token (reject old asset folder)
+PASS: asset 3 manifest SHA-256 is resolved 64 hex
+PASS: asset 3 manifest SHA == CURRENT_ASSET_SET SHA
+PASS: asset 3 mandatory transport_chain dropbox->github
+PASS: asset 3 Dropbox upload completed
+PASS: asset 3 Dropbox file_id receipt present
+PASS: asset 3 Dropbox path receipt present
+PASS: asset 3 Dropbox size receipt > 0: 126635
+PASS: asset 3 Dropbox content_hash receipt is 64 hex
+PASS: asset 3 Dropbox live verification URL host is Dropbox
+PASS: asset 3 GitHub import SHA-256 verified flag true
+PASS: asset 3 GitHub main contents metadata verified flag true
+PASS: asset 3 source format is jpg/png
+PASS: asset 3 authoritative original path == CURRENT_ASSET_SET original path
+PASS: asset 3 authoritative original exists: /home/runner/work/naver-blog-images/naver-blog-images/.validation-work/pack/run/assets/03-pleos.jpg
+PASS: asset 3 authoritative original SHA-256 matches manifest/current set
+PASS: asset 3 Dropbox receipt size == authoritative original size
+PASS: asset 3 Dropbox content_hash == locally computed authoritative-original Dropbox hash
+PASS: asset 4 role order/prefix: 04-durability
+PASS: asset 4 role == CURRENT_ASSET_SET role
+PASS: asset 4 configured GitHub raw download_url
+PASS: asset 4 URL uses CURRENT GitHub directory token (reject old asset folder)
+PASS: asset 4 manifest SHA-256 is resolved 64 hex
+PASS: asset 4 manifest SHA == CURRENT_ASSET_SET SHA
+PASS: asset 4 mandatory transport_chain dropbox->github
+PASS: asset 4 Dropbox upload completed
+PASS: asset 4 Dropbox file_id receipt present
+PASS: asset 4 Dropbox path receipt present
+PASS: asset 4 Dropbox size receipt > 0: 222863
+PASS: asset 4 Dropbox content_hash receipt is 64 hex
+PASS: asset 4 Dropbox live verification URL host is Dropbox
+PASS: asset 4 GitHub import SHA-256 verified flag true
+PASS: asset 4 GitHub main contents metadata verified flag true
+PASS: asset 4 source format is jpg/png
+PASS: asset 4 authoritative original path == CURRENT_ASSET_SET original path
+PASS: asset 4 authoritative original exists: /home/runner/work/naver-blog-images/naver-blog-images/.validation-work/pack/run/assets/04-durability.jpg
+PASS: asset 4 authoritative original SHA-256 matches manifest/current set
+PASS: asset 4 Dropbox receipt size == authoritative original size
+PASS: asset 4 Dropbox content_hash == locally computed authoritative-original Dropbox hash
+PASS: asset 5 role order/prefix: 05-theater
+PASS: asset 5 role == CURRENT_ASSET_SET role
+PASS: asset 5 configured GitHub raw download_url
+PASS: asset 5 URL uses CURRENT GitHub directory token (reject old asset folder)
+PASS: asset 5 manifest SHA-256 is resolved 64 hex
+PASS: asset 5 manifest SHA == CURRENT_ASSET_SET SHA
+PASS: asset 5 mandatory transport_chain dropbox->github
+PASS: asset 5 Dropbox upload completed
+PASS: asset 5 Dropbox file_id receipt present
+PASS: asset 5 Dropbox path receipt present
+PASS: asset 5 Dropbox size receipt > 0: 126374
+PASS: asset 5 Dropbox content_hash receipt is 64 hex
+PASS: asset 5 Dropbox live verification URL host is Dropbox
+PASS: asset 5 GitHub import SHA-256 verified flag true
+PASS: asset 5 GitHub main contents metadata verified flag true
+PASS: asset 5 source format is jpg/png
+PASS: asset 5 authoritative original path == CURRENT_ASSET_SET original path
+PASS: asset 5 authoritative original exists: /home/runner/work/naver-blog-images/naver-blog-images/.validation-work/pack/run/assets/05-theater.jpg
+PASS: asset 5 authoritative original SHA-256 matches manifest/current set
+PASS: asset 5 Dropbox receipt size == authoritative original size
+PASS: asset 5 Dropbox content_hash == locally computed authoritative-original Dropbox hash
+PASS: five manifest roles are unique
+PASS: five manifest download URLs are unique
+PASS: HTML img src sequence exactly equals CURRENT manifest verified download_url sequence
+PASS: OLD_ASSET_REFERENCE absent from article: gv90-current-issue-v4
+PASS: asset 1 Dropbox verification redirect remains on Dropbox host
+PASS: asset 1 LIVE Dropbox byte length == receipt/original size: 361823
+PASS: asset 1 LIVE Dropbox bytes SHA-256 == authoritative original SHA-256
+PASS: asset 1 LIVE Dropbox content hash == receipt/local content hash
+PASS: asset 1 GitHub contents API URL derivable
+PASS: asset 1 contents metadata download_url exactly matches HTML/manifest
+PASS: asset 1 contents metadata size > 0: 361823
+PASS: asset 1 contents metadata blob SHA present
+PASS: asset 1 declared Git blob SHA matches current metadata
+PASS: asset 1 GitHub raw bytes SHA-256 == authoritative original SHA-256
+PASS: asset 1 metadata size == downloaded byte length: 361823
+PASS: asset 1 raw content-type image/*: image/jpeg
+PASS: asset 2 Dropbox verification redirect remains on Dropbox host
+PASS: asset 2 LIVE Dropbox byte length == receipt/original size: 132835
+PASS: asset 2 LIVE Dropbox bytes SHA-256 == authoritative original SHA-256
+PASS: asset 2 LIVE Dropbox content hash == receipt/local content hash
+PASS: asset 2 GitHub contents API URL derivable
+PASS: asset 2 contents metadata download_url exactly matches HTML/manifest
+PASS: asset 2 contents metadata size > 0: 132835
+PASS: asset 2 contents metadata blob SHA present
+PASS: asset 2 declared Git blob SHA matches current metadata
+PASS: asset 2 GitHub raw bytes SHA-256 == authoritative original SHA-256
+PASS: asset 2 metadata size == downloaded byte length: 132835
+PASS: asset 2 raw content-type image/*: image/jpeg
+PASS: asset 3 Dropbox verification redirect remains on Dropbox host
+PASS: asset 3 LIVE Dropbox byte length == receipt/original size: 126635
+PASS: asset 3 LIVE Dropbox bytes SHA-256 == authoritative original SHA-256
+PASS: asset 3 LIVE Dropbox content hash == receipt/local content hash
+PASS: asset 3 GitHub contents API URL derivable
+PASS: asset 3 contents metadata download_url exactly matches HTML/manifest
+PASS: asset 3 contents metadata size > 0: 126635
+PASS: asset 3 contents metadata blob SHA present
+PASS: asset 3 declared Git blob SHA matches current metadata
+PASS: asset 3 GitHub raw bytes SHA-256 == authoritative original SHA-256
+PASS: asset 3 metadata size == downloaded byte length: 126635
+PASS: asset 3 raw content-type image/*: image/jpeg
+PASS: asset 4 Dropbox verification redirect remains on Dropbox host
+PASS: asset 4 LIVE Dropbox byte length == receipt/original size: 222863
+PASS: asset 4 LIVE Dropbox bytes SHA-256 == authoritative original SHA-256
+PASS: asset 4 LIVE Dropbox content hash == receipt/local content hash
+PASS: asset 4 GitHub contents API URL derivable
+PASS: asset 4 contents metadata download_url exactly matches HTML/manifest
+PASS: asset 4 contents metadata size > 0: 222863
+PASS: asset 4 contents metadata blob SHA present
+PASS: asset 4 declared Git blob SHA matches current metadata
+PASS: asset 4 GitHub raw bytes SHA-256 == authoritative original SHA-256
+PASS: asset 4 metadata size == downloaded byte length: 222863
+PASS: asset 4 raw content-type image/*: image/jpeg
+PASS: asset 5 Dropbox verification redirect remains on Dropbox host
+PASS: asset 5 LIVE Dropbox byte length == receipt/original size: 126374
+PASS: asset 5 LIVE Dropbox bytes SHA-256 == authoritative original SHA-256
+PASS: asset 5 LIVE Dropbox content hash == receipt/local content hash
+PASS: asset 5 GitHub contents API URL derivable
+PASS: asset 5 contents metadata download_url exactly matches HTML/manifest
+PASS: asset 5 contents metadata size > 0: 126374
+PASS: asset 5 contents metadata blob SHA present
+PASS: asset 5 declared Git blob SHA matches current metadata
+PASS: asset 5 GitHub raw bytes SHA-256 == authoritative original SHA-256
+PASS: asset 5 metadata size == downloaded byte length: 126374
+PASS: asset 5 raw content-type image/*: image/jpeg
+CURRENT_ASSET_SET_PASS=YES
+OLD_ASSET_REFERENCE_PASS=YES
+DROPBOX_LIVE_IDENTITY_PASS=YES
+ASSET_IDENTITY_PASS=YES
+PASS: article exists
+PASS: preview exists
+PASS: asset manifest exists
+PASS: current asset set exists
+PASS: article exactly five images
+PASS: article five unique image URLs
+PASS: article uses main-branch GitHub raw URLs only
+PASS: preview image URL sequence exactly equals article image URL sequence
+PASS: preview forbidden runtime workaround absent: <iframe
+PASS: preview forbidden runtime workaround absent: srcdoc
+PASS: preview forbidden runtime workaround absent: data:image
+PASS: preview forbidden runtime workaround absent: blob:
+PASS: preview forbidden runtime workaround absent: data-public-src
+PASS: preview forbidden runtime workaround absent: /mnt/data/
+PASS: preview forbidden runtime workaround absent: sandbox:
+PASS: current set declares asset_origin_mode
+PASS: asset_origin_mode valid
+PASS: current set has five assets
+PASS: independent_asset_count is 5
+PASS: no derivative parent in independent mode
+PASS: all five independent_source_id values present
+PASS: all five independent_source_id values are unique
+PASS: no asset is derived/cropped from another asset
+PASS: manifest has five assets
+PASS: manifest publication_branch=main
+PASS: GitHub main metadata verified 5/5
+PASS: Dropbox completed 5/5
+PASS: manifest preview runtime mode canonical
+PASS: URLs resolved from contents metadata, not guessed
+PASS: asset 1 main metadata verified
+PASS: asset 1 GitHub SHA verified
+PASS: asset 1 main raw download_url
+PASS: asset 1 source format jpg/png only
+PASS: asset 2 main metadata verified
+PASS: asset 2 GitHub SHA verified
+PASS: asset 2 main raw download_url
+PASS: asset 2 source format jpg/png only
+PASS: asset 3 main metadata verified
+PASS: asset 3 GitHub SHA verified
+PASS: asset 3 main raw download_url
+PASS: asset 3 source format jpg/png only
+PASS: asset 4 main metadata verified
+PASS: asset 4 GitHub SHA verified
+PASS: asset 4 main raw download_url
+PASS: asset 4 source format jpg/png only
+PASS: asset 5 main metadata verified
+PASS: asset 5 GitHub SHA verified
+PASS: asset 5 main raw download_url
+PASS: asset 5 source format jpg/png only
+PASS: manifest download_url order equals article image order
+INDEPENDENT_ASSET_5=PASS
+PREVIEW_RUNTIME_SAFE=PASS
+GITHUB_MAIN_METADATA_COUNT=5
+DROPBOX_COMPLETE_COUNT=5
+ARTICLE_RAW_URL_BINDING=PASS
+ONE_SHOT_PIPELINE_LOCK=PASS
+PASS: article HTML input exists
+PASS: separate preview HTML input exists
+PASS: asset identity manifest input exists
+PASS: CURRENT_ASSET_SET input exists
+PASS: base editorial validator PASS
+PASS: PATCH8 golden/exact preview enforcement PASS
+PASS: CURRENT approved asset set + exact identity + LIVE Dropbox + GitHub metadata validator PASS
+PASS: PATCH10 one-shot anti-workaround validator PASS
+PASS: default asset count exactly 5: 5
+PASS: all image URLs use configured GitHub raw repo
+PASS: all image URLs are unique roles
+PASS: root 760px present
+PASS: root 17px/1.9/400 present
+PASS: at least 3 H2 sections: 6
+PASS: H2 1 exact 24/1.5/800/margin0
+PASS: H2 2 exact 24/1.5/800/margin0
+PASS: H2 3 exact 24/1.5/800/margin0
+PASS: H2 4 exact 24/1.5/800/margin0
+PASS: H2 5 exact 24/1.5/800/margin0
+PASS: H2 6 exact 24/1.5/800/margin0
+PASS: double-BR breathing >=12: 42
+PASS: final Golden article table count is zero
+PASS: image 1 remote bytes >=120KB: 361823
+PASS: image 1 content-type image/*: image/jpeg
+PASS: image 1 minimum 1200x675: 1600x900
+PASS: image 1 wide premium ratio: 1.778
+PASS: image 2 remote bytes >=120KB: 132835
+PASS: image 2 content-type image/*: image/jpeg
+PASS: image 2 minimum 1200x675: 1600x900
+PASS: image 2 wide premium ratio: 1.778
+PASS: image 3 remote bytes >=120KB: 126635
+PASS: image 3 content-type image/*: image/jpeg
+PASS: image 3 minimum 1200x675: 1600x900
+PASS: image 3 wide premium ratio: 1.778
+PASS: image 4 remote bytes >=120KB: 222863
+PASS: image 4 content-type image/*: image/jpeg
+PASS: image 4 minimum 1200x675: 1600x900
+PASS: image 4 wide premium ratio: 1.778
+PASS: image 5 remote bytes >=120KB: 126374
+PASS: image 5 content-type image/*: image/jpeg
+PASS: image 5 minimum 1200x675: 1600x900
+PASS: image 5 wide premium ratio: 1.778
+
+GOLDEN_SOURCE_LOCK=PASS / EXTERNAL_ENFORCEMENT_LOCK=PASS / GOLDEN_RESULT=PASS
+ONE_SHOT_PIPELINE_LOCK=PASS / DROPBOX_GITHUB_CHAIN_PASS=YES / ASSET_IDENTITY_PASS=YES / PREVIEW_BINDING_PASS=YES / CONVERGENCE_PASS=YES
+PUBLISH_VALIDATION_RECEIPT=/home/runner/work/naver-blog-images/naver-blog-images/validation-receipts/gv90-oled-20260929-v1/publish_validation_receipt.json
