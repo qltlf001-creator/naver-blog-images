@@ -1,0 +1,54 @@
+name: Validate GV90 OLED PATCH10 convergence
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/validate-gv90-oled-20260929-v1.yml'
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Download canonical source plus finalized run bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 2 --connect-timeout 20 'https://uc37209454b0a94aa99fe2b72e24.dl.dropboxusercontent.com/cd/0/get/DJAJsAczgnAUrmTp-c1dDwPkka4cisVM8KqHtnRMtRyqFAbBjvDCGr2dgSK5Rj0X1I0exkdpyRNdI3NWnXxznfASwEpd9x0ml0VqZ3erqBJjksf0BxtT8jTrZAl09MbSCCpwHmuc06d-FQGWwHbqcCCzB7-jAmyUMpTvBGfPJyMlqg/file?c_luid=3565984f' -o validation-pack.zip
+          echo 'a08711727513c8587994a9e4c4c940a9319d9f73be427a277ab943531191571c  validation-pack.zip' | sha256sum -c -
+          rm -rf .validation-work
+          mkdir -p .validation-work/pack .validation-work/src
+          unzip -q validation-pack.zip -d .validation-work/pack
+          unzip -q .validation-work/pack/source.zip -d .validation-work/src
+      - name: Install validator runtime dependencies
+        run: python -m pip install --quiet pillow jsonschema
+      - name: Run canonical PATCH10 live publish-bundle validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=$(dirname "$(find .validation-work/src -type f -name 00_READ_FIRST_PROJECT_EXECUTION_GATE.md | head -1)")
+          test -n "$ROOT"
+          RUN="$GITHUB_WORKSPACE/.validation-work/pack/run"
+          mkdir -p "$GITHUB_WORKSPACE/validation-receipts/gv90-oled-20260929-v1"
+          python "$ROOT/TOOLS/validate_publish_bundle.py" "$RUN/article.html" \
+            --preview "$RUN/article.preview.html" \
+            --asset-manifest "$RUN/asset_identity.json" \
+            --current-asset-set "$RUN/current_asset_set.json" \
+            --receipt "$GITHUB_WORKSPACE/validation-receipts/gv90-oled-20260929-v1/publish_validation_receipt.json" \
+            | tee "$GITHUB_WORKSPACE/validation-receipts/gv90-oled-20260929-v1/validation.log"
+      - name: Commit PASS receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'qltlf001-creator'
+          git config user.email 'qltlf001@gmail.com'
+          git add validation-receipts/gv90-oled-20260929-v1
+          if git diff --cached --quiet; then
+            echo 'NOOP_SUCCESS: validation receipt already current'
+          else
+            git commit -m 'Record GV90 OLED PATCH10 convergence PASS [skip ci]'
+            git push origin main
+          fi
