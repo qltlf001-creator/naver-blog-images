@@ -1,0 +1,34 @@
+name: Build Tucson October 2026 editorial assets
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build_tucson_october_20260928.py'
+      - '.github/workflows/build-tucson-october-20260928.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+          python -m pip install --upgrade pip
+          python -m pip install pillow==12.3.0
+      - name: Render five editorial assets
+        run: python scripts/build_tucson_october_20260928.py
+      - name: Commit exact rendered assets
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 2026-09/tucson-october-20260928/*.jpg
+          if git diff --cached --quiet; then
+            echo 'No image changes'
+          else
+            git commit -m 'Add Tucson October 2026 editorial assets [skip ci]'
+            git push
+          fi
