@@ -86,8 +86,16 @@ def artifact_zip(run_id, artifact_name):
     listing = gh_json(f'https://api.github.com/repos/{REPO}/actions/runs/{run_id}/artifacts?per_page=100')
     for artifact in listing.get('artifacts', []):
         if artifact.get('name') == artifact_name and not artifact.get('expired'):
-            with urlopen(Request(artifact['archive_download_url'], headers=gh_headers()), timeout=60) as response:
-                return response.read()
+            target = Path('/tmp/naver-relay-key-artifact.zip')
+            token = os.environ.get('GH_TOKEN', '')
+            subprocess.run([
+                'curl', '-fL', '--retry', '2', '--silent', '--show-error',
+                '-H', f'Authorization: Bearer {token}',
+                '-H', 'Accept: application/vnd.github+json',
+                '-H', 'X-GitHub-Api-Version: 2022-11-28',
+                artifact['archive_download_url'], '-o', str(target)
+            ], check=True)
+            return target.read_bytes()
     return None
 
 
