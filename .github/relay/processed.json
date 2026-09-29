@@ -5,6 +5,7 @@
     ".github/relay/queue/20260929T0956Z-new-car-discount-retry.payload",
     ".github/relay/queue/20260929T1435Z-g80-recall-v1.payload",
     ".github/relay/queue/20260930-tesla-model3-airbag-recall-v1.payload",
-    ".github/relay/queue/engine-oil-5000-vs-10000-20260930.payload"
+    ".github/relay/queue/engine-oil-5000-vs-10000-20260930.payload",
+    ".github/relay/queue/20260930-jeep-wrangler-gladiator-ehpsp-recall-v1.payload"
   ]
 }
