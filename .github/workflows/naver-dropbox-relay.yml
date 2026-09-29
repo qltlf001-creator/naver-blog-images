@@ -1,16 +1,24 @@
 name: Canonical Dropbox to GitHub Asset Relay
+
 on:
   workflow_dispatch:
     inputs:
       relay_payload:
-        description: 'JSON: directory_token and five completed Dropbox assets (source_url, sha256, dropbox_size, dropbox_file_id, dropbox_upload_status, target_path)'
-        required: true
+        description: 'Optional recovery input. Normal publishing uses an encrypted queue file.'
+        required: false
         type: string
+  push:
+    paths:
+      - '.github/relay/queue/*.payload'
+
 permissions:
   contents: write
+  actions: read
+
 concurrency:
   group: naver-blog-image-main
   cancel-in-progress: false
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -21,7 +29,7 @@ jobs:
           fetch-depth: 1
       - name: Verify Dropbox originals, publish to main, verify metadata and raw bytes
         env:
-          RELAY_PAYLOAD: ${{ inputs.relay_payload }}
+          RELAY_PAYLOAD: ${{ inputs.relay_payload || '' }}
           GH_TOKEN: ${{ github.token }}
           RELAY_RECEIPT_PATH: github_main_receipt.json
         run: python3 .github/scripts/github_dropbox_relay.py
@@ -31,3 +39,11 @@ jobs:
           name: github-main-receipt
           path: github_main_receipt.json
           if-no-files-found: error
+      - name: Refresh secure relay key artifact
+        if: ${{ hashFiles('relay_key_bundle.json') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: relay-key-bundle
+          path: relay_key_bundle.json
+          if-no-files-found: error
+          retention-days: 90
