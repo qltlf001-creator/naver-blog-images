@@ -1,6 +1,7 @@
 {
   "schema": "NAVER_RELAY_PROCESSED_V1",
   "processed": [
-    ".github/relay/queue/20260929T0952Z-new-car-discount.payload"
+    ".github/relay/queue/20260929T0952Z-new-car-discount.payload",
+    ".github/relay/queue/20260929T0956Z-new-car-discount-retry.payload"
   ]
 }
