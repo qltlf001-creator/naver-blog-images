@@ -9,6 +9,7 @@
     ".github/relay/queue/20260930-jeep-wrangler-gladiator-ehpsp-recall-v1.payload",
     ".github/relay/queue/20260929T204700-transmission-oil-no-change.payload",
     ".github/relay/queue/20260929T205200-transmission-oil-no-change-retry.payload",
-    ".github/relay/queue/20260930-jeep-wrangler-gladiator-ehpsp-recall-v1-retry1.payload"
+    ".github/relay/queue/20260930-jeep-wrangler-gladiator-ehpsp-recall-v1-retry1.payload",
+    ".github/relay/queue/20260930T004600Z-coolant-replacement-interval.payload"
   ]
 }
