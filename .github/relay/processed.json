@@ -14,6 +14,7 @@
     ".github/relay/queue/20260930-korea-venezuela-broadcast-v2.payload",
     ".github/relay/queue/20260930T133500Z-engine-warning-flashing.payload",
     ".github/relay/queue/20260930T0458Z-car-battery-discharge-v1.payload",
-    ".github/relay/queue/20260930T140700Z-tpms-warning.payload"
+    ".github/relay/queue/20260930T140700Z-tpms-warning.payload",
+    ".github/relay/queue/20260930-car-battery-discharge-v2.payload"
   ]
 }
