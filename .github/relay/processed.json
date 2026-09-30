@@ -11,6 +11,7 @@
     ".github/relay/queue/20260929T205200-transmission-oil-no-change-retry.payload",
     ".github/relay/queue/20260930-jeep-wrangler-gladiator-ehpsp-recall-v1-retry1.payload",
     ".github/relay/queue/20260930T004600Z-coolant-replacement-interval.payload",
-    ".github/relay/queue/20260930-korea-venezuela-broadcast-v2.payload"
+    ".github/relay/queue/20260930-korea-venezuela-broadcast-v2.payload",
+    ".github/relay/queue/20260930T133500Z-engine-warning-flashing.payload"
   ]
 }
