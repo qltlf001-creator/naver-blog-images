@@ -1,0 +1,1 @@
+Publication staging for Naver blog image assets. Approved originals are retained in Dropbox; GitHub hosts web-delivery copies for public HTTPS image URLs.
