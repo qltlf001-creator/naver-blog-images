@@ -1,0 +1,42 @@
+name: Materialize bank hacking v2 raster assets
+
+on:
+  push:
+    paths:
+      - '20261005-bank-hacking-president-v2/MATERIALIZE_V2.trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Decode staged JPEGs
+        shell: bash
+        run: |
+          set -euo pipefail
+          DIR='20261005-bank-hacking-president-v2'
+          for f in 01-homefeed 02-leak-scope 03-attack-route 04-data-leak-vs-account-loss 05-consumer-action; do
+            test -s "$DIR/$f.final.b64.txt"
+            base64 -d "$DIR/$f.final.b64.txt" > "$DIR/$f.jpg"
+            python3 - "$DIR/$f.jpg" <<'PY'
+import pathlib,sys
+p=pathlib.Path(sys.argv[1]); b=p.read_bytes()
+assert b[:3] == b'\xff\xd8\xff' and len(b) > 10000
+print(p, len(b))
+PY
+          done
+      - name: Commit raster assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 20261005-bank-hacking-president-v2/*.jpg
+          git commit -m 'Publish bank hacking v2 raster assets'
+          git push origin HEAD:main
