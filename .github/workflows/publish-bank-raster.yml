@@ -1,0 +1,48 @@
+name: Publish bank raster images
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-bank-raster.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Decode raster images from existing SVG assets
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, base64
+          d=Path('20261005-bank-hacking-president-v2')
+          items=[
+            ('01-homefeed.svg','01-homefeed-public.jpg'),
+            ('02-leak-scope-mini.svg','02-leak-scope-public.jpg'),
+            ('03-attack-route-mini.svg','03-attack-route-public.jpg'),
+            ('04-data-leak-vs-account-loss-mini.svg','04-data-leak-vs-account-loss-public.jpg'),
+            ('05-consumer-action-mini.svg','05-consumer-action-public.jpg'),
+          ]
+          for src,dst in items:
+            text=(d/src).read_text(encoding='utf-8')
+            m=re.search(r'data:image/jpeg;base64,([^\"]+)', text)
+            if not m:
+              raise SystemExit(f'base64 jpeg missing: {src}')
+            data=base64.b64decode(m.group(1))
+            if not data.startswith(b'\xff\xd8\xff'):
+              raise SystemExit(f'bad jpeg: {src}')
+            (d/dst).write_bytes(data)
+            print(dst, len(data))
+          PY
+      - name: Commit public JPGs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 20261005-bank-hacking-president-v2/*-public.jpg
+          git commit -m 'Publish bank hacking raster images' || exit 0
+          git push origin HEAD:main
