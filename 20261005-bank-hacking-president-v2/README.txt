@@ -1,1 +1,1 @@
-Temporary staging may exist in this folder. Final Naver image binding must use only verified raw HTTPS image files (.jpg/.png), never .b64.txt or Dropbox temporary URLs.
+Final Naver image binding for this article uses verified raw HTTPS image files in this folder. Do not bind article HTML to Dropbox temporary URLs or .b64.txt staging files.
