@@ -1,1 +1,1 @@
-Publication staging for Naver blog image assets. Approved originals are retained in Dropbox; GitHub hosts web-delivery copies for public HTTPS image URLs.
+Temporary staging may exist in this folder. Final Naver image binding must use only verified raw HTTPS image files (.jpg/.png), never .b64.txt or Dropbox temporary URLs.
