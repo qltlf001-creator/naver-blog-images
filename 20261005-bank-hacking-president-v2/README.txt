@@ -1,1 +1,1 @@
-Final Naver image binding for this article uses verified raw HTTPS image files in this folder. Do not bind article HTML to Dropbox temporary URLs or .b64.txt staging files.
+Final Naver image binding uses only verified raw HTTPS image files in this folder. Approved PNG originals remain archived separately in Dropbox; GitHub JPEGs are web-delivery derivatives of the same approved visuals.
