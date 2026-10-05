@@ -1,0 +1,49 @@
+name: Secure Naver Relay Issue Trigger 20261005
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: naver-blog-image-main
+  cancel-in-progress: false
+
+jobs:
+  relay:
+    if: github.event.issue.title == 'NAVER_RELAY_20261005_BANK_HACKING'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Materialize encrypted relay payload
+        env:
+          RELAY_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          mkdir -p .github/relay/queue
+          printf '%s' "$RELAY_BODY" > ".github/relay/queue/issue-${ISSUE_NUMBER}.payload"
+      - name: Verify Dropbox originals, publish to main, verify metadata and raw bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELAY_RECEIPT_PATH: github_main_receipt.json
+        run: python3 .github/scripts/github_dropbox_relay.py
+      - name: Preserve main metadata receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-main-receipt-issue-${{ github.event.issue.number }}
+          path: github_main_receipt.json
+          if-no-files-found: error
+      - name: Refresh secure relay key artifact
+        if: ${{ hashFiles('relay_key_bundle.json') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: relay-key-bundle
+          path: relay_key_bundle.json
+          if-no-files-found: error
+          retention-days: 90
