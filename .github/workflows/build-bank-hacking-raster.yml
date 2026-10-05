@@ -21,10 +21,12 @@ jobs:
         run: |
           set -euo pipefail
           d='20261005-bank-hacking-president-v2'
-          for n in 01-homefeed 02-leak-scope 03-attack-route 04-data-leak-vs-account-loss 05-consumer-action; do
+          for n in 01-homefeed 02-leak-scope 03-attack-route 04-data-leak-vs-account-loss; do
             base64 -d "$d/${n}-raster.b64.txt" > "$d/${n}.jpg"
             test "$(xxd -p -l 3 "$d/${n}.jpg")" = 'ffd8ff'
           done
+          base64 -d "$d/05-consumer-action.jpg.b64.txt" > "$d/05-consumer-action.jpg"
+          test "$(xxd -p -l 3 "$d/05-consumer-action.jpg")" = 'ffd8ff'
       - name: Commit raster assets
         shell: bash
         run: |
