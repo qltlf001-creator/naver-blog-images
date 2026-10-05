@@ -1,0 +1,49 @@
+name: Publish staged KLPGA approved assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/staging/klpga-20261006/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Rebuild, verify and publish images
+        shell: bash
+        run: |
+          set -euo pipefail
+          stage='.github/staging/klpga-20261006'
+          target='20261006-klpga-home-github-final'
+          mkdir -p "$target"
+          rebuild() {
+            local prefix="$1" out="$2" size="$3" sha="$4"
+            cat "$stage/${prefix}.part."* | base64 -d > "$target/$out"
+            test "$(stat -c%s "$target/$out")" = "$size"
+            test "$(sha256sum "$target/$out" | awk '{print $1}')" = "$sha"
+            python3 - "$target/$out" <<'PY'
+import sys
+with open(sys.argv[1], 'rb') as f:
+    assert f.read(3) == b'\xff\xd8\xff'
+PY
+          }
+          rebuild '01' '01-cover.jpg' 17793 d6f6bdfc5be8f6b41bc4770be3e88008320aa49a60a00c1f80f516a4a6991d7c
+          rebuild '02' '02-score-rule.jpg' 19984 e9817ac026e515717cd917c97bed17cfa58d5a94ab924a2c0507c60edcc13ad2
+          rebuild '03' '03-key-info.jpg' 20400 68f418987eeca152c5c9c18dfa2e7c66cdce4f13f5a058bc3fd231b6e97443c4
+          rebuild '04' '04-attack-why.jpg' 18686 81efdaec7b7cafdf2b45acaf88c7561107024ec3209b19ba71ea1c6685a57724
+          rebuild '05' '05-week-points.jpg' 19483 93348bf4b1a5aa95a56554c40682612ee0ec1dfd76e133a01b1e1650cbd85570
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$target"
+          git rm -r "$stage"
+          git rm .github/workflows/klpga-staged-publish.yml
+          git commit -m 'Publish verified KLPGA HOME_FIRST assets'
+          git push origin HEAD:main
