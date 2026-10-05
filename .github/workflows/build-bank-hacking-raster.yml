@@ -1,0 +1,36 @@
+name: Build bank hacking raster assets
+
+on:
+  push:
+    paths:
+      - '20261005-bank-hacking-president-v2/RASTER_BUILD_TRIGGER.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Decode raster assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          d='20261005-bank-hacking-president-v2'
+          for n in 01-homefeed 02-leak-scope 03-attack-route 04-data-leak-vs-account-loss 05-consumer-action; do
+            base64 -d "$d/${n}-raster.b64.txt" > "$d/${n}.jpg"
+            test "$(xxd -p -l 3 "$d/${n}.jpg")" = 'ffd8ff'
+          done
+      - name: Commit raster assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 20261005-bank-hacking-president-v2/*.jpg
+          git diff --cached --quiet || git commit -m 'Publish bank hacking raster assets'
+          git push origin HEAD:main
