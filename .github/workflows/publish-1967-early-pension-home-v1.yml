@@ -1,0 +1,60 @@
+name: Publish 1967 early pension HOME assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/staging/1967-early-pension-home-v1/READY'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: naver-blog-image-main
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Download Dropbox originals, verify and publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          stage='.github/staging/1967-early-pension-home-v1'
+          target='20261006-1967-early-pension-home-v1'
+          mkdir -p "$target"
+          python3 - <<'PY'
+import hashlib, json
+from pathlib import Path
+from urllib.request import Request, urlopen
+from urllib.parse import urlparse
+
+stage = Path('.github/staging/1967-early-pension-home-v1')
+target = Path('20261006-1967-early-pension-home-v1')
+manifest = json.loads((stage/'manifest.json').read_text(encoding='utf-8'))
+assets = manifest['assets']
+assert len(assets) == 5
+for i, a in enumerate(assets, 1):
+    assert a['name'].startswith(f'{i:02d}-')
+    u = a['url']
+    host = (urlparse(u).hostname or '').lower()
+    assert host.endswith('.dropboxusercontent.com') or host == 'dropboxusercontent.com'
+    with urlopen(Request(u, headers={'User-Agent':'NaverBlogPublisher/1.0'}), timeout=120) as r:
+        data = r.read()
+    assert len(data) == a['size'], (a['name'], len(data), a['size'])
+    assert hashlib.sha256(data).hexdigest() == a['sha256'], a['name']
+    assert data.startswith(b'\x89PNG\r\n\x1a\n'), a['name']
+    (target/a['name']).write_bytes(data)
+PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$target"
+          git rm -r "$stage"
+          git rm .github/workflows/publish-1967-early-pension-home-v1.yml
+          git commit -m 'Publish verified 1967 early pension HOME assets'
+          git push origin HEAD:main
