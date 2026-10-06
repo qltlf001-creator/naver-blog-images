@@ -1,0 +1,49 @@
+name: Relay 50plus primary care HOME assets
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  actions: read
+  issues: write
+
+concurrency:
+  group: naver-blog-image-main
+  cancel-in-progress: false
+
+jobs:
+  relay:
+    if: github.event.issue.title == 'NAVER_RELAY_50PLUS_PRIMARY_CARE'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Verify Dropbox originals, publish to main, verify raw bytes
+        env:
+          RELAY_PAYLOAD: ${{ github.event.issue.body }}
+          GH_TOKEN: ${{ github.token }}
+          RELAY_RECEIPT_PATH: github_main_receipt.json
+        run: python3 .github/scripts/github_dropbox_relay.py
+      - name: Preserve relay receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-main-receipt-50plus-primary-care
+          path: github_main_receipt.json
+          if-no-files-found: error
+      - name: Remove one-off trigger
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/naver-relay-50plus-primary-care.yml
+          git commit -m 'Remove one-off 50plus primary care relay trigger'
+          git push origin HEAD:main
+      - name: Close relay issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue close "${{ github.event.issue.number }}" --repo "${{ github.repository }}"
