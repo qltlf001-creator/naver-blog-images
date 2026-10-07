@@ -182,6 +182,19 @@ def find_unprocessed_queue():
     return pending[0] if pending else None
 
 
+def relay_queue_text(path):
+    raw = path.read_text(encoding='ascii').strip()
+    if re.fullmatch(r'blob:[0-9a-f]{40}', raw):
+        blob_sha = raw.split(':', 1)[1]
+        record = gh_json(f'https://api.github.com/repos/{REPO}/git/blobs/{blob_sha}')
+        require(record.get('encoding') == 'base64', 'relay blob encoding must be base64')
+        try:
+            raw = base64.b64decode(record.get('content', '')).decode('ascii').strip()
+        except Exception as exc:
+            raise ValueError('relay blob content is invalid') from exc
+    return raw
+
+
 def decrypt_queue(path):
     private_key, config = load_private_key()
     require(PUBLIC_CERT.exists(), 'relay public certificate missing')
@@ -189,7 +202,7 @@ def decrypt_queue(path):
     key_path = Path('/tmp/naver-relay-private.pem')
     out_path = Path('/tmp/naver-relay-payload.json')
     try:
-        cms_path.write_bytes(base64.b64decode(path.read_text(encoding='ascii').strip(), validate=True))
+        cms_path.write_bytes(base64.b64decode(relay_queue_text(path), validate=True))
     except Exception as exc:
         raise ValueError('encrypted relay queue is invalid') from exc
     key_path.write_bytes(private_key)
