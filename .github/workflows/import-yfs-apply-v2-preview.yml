@@ -14,10 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Download preview image
         run: |
           mkdir -p 20261007-youth-future-savings-apply-v2
-          curl -L --fail --retry 2 'https://uc33284706be941bf188ea314d6e.dl.dropboxusercontent.com/cd/0/get/DJireSAqp8PTx-bRo9prF5e7ReDelc69zYC6pXXUuUJtvwIyxKGag9OD0-Hql1J4wGlgs2nqcKgNmGVfxJsBYen7ZCd-j7ZP2-oYWMyFZxoREfWE29xj3IP1RMpp_mOjdPWU6DbQuXDhM2vZT3GBRnHmGbJoHRCbygZxB9_uIEhuvg/file?c_luid=3565984f' -o 20261007-youth-future-savings-apply-v2/01-cover.png
+          curl -L --fail --retry 2 'https://uc4eb384cd4439eb812df0906127.dl.dropboxusercontent.com/cd/0/get/DJgvedgxQFVj7w-zZk1JEGgx-q5dC1qLl3_IkH1A1e_keHlfrSjIUHqUAtl1MBbITTJ1o8p1x9mzJp0ISCeJjVKlLkp0DSWPzwVgYPGi7huMmJgTCOV67T5mq1iaECRbaqkUErjX5iL7tSuev2TttqshVUJpDEGfCcricgAakveQYA/file?c_luid=3565984f' -o 20261007-youth-future-savings-apply-v2/01-cover.png
       - name: Commit image
         run: |
           git config user.name "github-actions[bot]"
@@ -27,5 +29,6 @@ jobs:
             echo "No changes"
           else
             git commit -m "Add youth future savings application preview cover"
-            git push
+            git pull --rebase origin main
+            git push origin main
           fi
