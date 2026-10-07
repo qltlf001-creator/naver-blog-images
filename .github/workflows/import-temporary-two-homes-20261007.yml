@@ -1,0 +1,46 @@
+name: Import approved temporary-two-homes images
+
+on:
+  push:
+    paths:
+      - ".github/workflows/import-temporary-two-homes-20261007.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download approved image originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p 20261007-temporary-two-homes-v1
+          curl -L --fail --silent --show-error 'https://uc726e96b03da226365de8d3f08c.dl.dropboxusercontent.com/cd/0/get/DJitelL83Pncc3iFxgtoqKmhdDLstYxBZo8GNYvWwv9tZ_ofJwakTGW6QZv_CsEPfLV6v6XfA38AH2hcnJ0zYCVwz3o1fKJaJkMQojGgp9RyW9_CxznQQsQX637u_gEBvZzHixYW5YC84Yya-JdE1dO9kzItuPUVIeHQzyOxQTRs8w/file?c_luid=3565984f' -o 20261007-temporary-two-homes-v1/01-cover.png
+          curl -L --fail --silent --show-error 'https://uc85273b4c23c62fd60abeb9c8fb.dl.dropboxusercontent.com/cd/0/get/DJg6ial4NVVDz43uHJXrJMhdHqerhvbLp3b5Zs33Kod-KsaCXVKEBy2Mo7yrFhQAotw6Ml4Xl-fW938eg8frHoFLaNKLQV7yIQzIcvNSOquV2OuY7F4g6du1S9kB_YxI4TFLBoPx9shyf3JD0fOZDIBhb5AleVQTe8CQRP6CKqz7ng/file?c_luid=3565984f' -o 20261007-temporary-two-homes-v1/02-core-fact.png
+          curl -L --fail --silent --show-error 'https://uc577161ad6fe3615f7f4c9680b9.dl.dropboxusercontent.com/cd/0/get/DJiqe3tBGkXDz30qV8DJdU4czpeoNICvl2Uq85p9MURCDqMALgESn_-cpoZw3SRfuOtRTJVoqD6RcCjLAVNBkyQn-IaebZ8_PiYtj7FXeXD2UyO0q2FO0Vbbv-zcL4F5jNVUAJh0smGlmG0N7Y51zYk63WkCcDMyCrkr06Wo_B0c1w/file?c_luid=3565984f' -o 20261007-temporary-two-homes-v1/03-aug3-rule.png
+          curl -L --fail --silent --show-error 'https://uc4197784faf778abd32cb39011c.dl.dropboxusercontent.com/cd/0/get/DJiD7B92J5nm4y4iS5D_MQn3E6ux6V14VUaL_CaaS9auGRrQwgkl-AfYE4_niRmTBhrOa7C9K_GEPpLpT3yK_Z8b2AUSjyA1LyfpHMnwZ7HMm6E2peOrzmL6aDiDEkYZ00vtyAqMbyOvdDinx1wPcy9q5hI4t0j2pRbzl-nFCgQdJw/file?c_luid=3565984f' -o 20261007-temporary-two-homes-v1/04-tax-date-compare.png
+          curl -L --fail --silent --show-error 'https://uc72a1dbf5be15c4deb294e8fc5a.dl.dropboxusercontent.com/cd/0/get/DJg9S2qb1xG2_btOjIP641JqILUkKnmCEnqjwzHflT4FtnFP9wMDpq7JPG_ScjAwuihCqfJmd7DiBkSRk_ljg0FhJhSXwR_t2Qk-WAaqU15nzOLXnsPuaVPqNrgO-i07r-G1YCAVZqpUI7Cmin9OAiZP6GYQZrZfqmTagiHRL9iXDg/file?c_luid=3565984f' -o 20261007-temporary-two-homes-v1/05-checklist.png
+      - name: Verify byte-identical originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'c79300e3b856d7277495219a726750e62daf58c429950cc61dbe651552063f6a  20261007-temporary-two-homes-v1/01-cover.png' | sha256sum -c -
+          echo '9ccaa2258e4e72cb0c83fa38de1ce6b758ba9f8f7298f48cc570fe1cecb2ee13  20261007-temporary-two-homes-v1/02-core-fact.png' | sha256sum -c -
+          echo '07aee1ee6702179d9bf4c4c2eb4352df587370f1ec7a9274a725431e94884e90  20261007-temporary-two-homes-v1/03-aug3-rule.png' | sha256sum -c -
+          echo '1ad9c0512910f5e259ae61466505ffc520541bafb7713a1b114d368539085e62  20261007-temporary-two-homes-v1/04-tax-date-compare.png' | sha256sum -c -
+          echo '36de38d3c98be78174e1e2adc6520bb85ea2eeeb7ec4de93824d3c2901cbb7a0  20261007-temporary-two-homes-v1/05-checklist.png' | sha256sum -c -
+      - name: Commit image set
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "qltlf001-creator"
+          git config user.email "qltlf001@gmail.com"
+          git add 20261007-temporary-two-homes-v1
+          git rm .github/workflows/import-temporary-two-homes-20261007.yml
+          git commit -m "Add approved temporary two-homes image set"
+          git push
