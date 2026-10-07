@@ -1,0 +1,36 @@
+name: Import youth future savings apply v3 assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-yfs-apply-v3-assets.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download generated assets from Dropbox
+        run: |
+          set -euo pipefail
+          mkdir -p 20261007-youth-future-savings-apply-v3
+          curl -L --fail --retry 2 'https://uc9f6c154766157429efaaf24d37.dl.dropboxusercontent.com/cd/0/get/DJhBIfbJDcvKvYKPFmeQK9y9kDShFlK9QNDwdQj3X3Gk_Hx-ycUnqUmIvvICdE3kJYTsiI-9O-6r5WTuKxobnVzWOIblHEE4wfs6imK4uyW_3cECzDrezzo5RrG_2_z_lsJH9B4j49Vl659bzf9jJ19Yu4bAbksxNPJikz0uRnwD2A/file?c_luid=3565984f' -o 20261007-youth-future-savings-apply-v3/01-cover.png
+          curl -L --fail --retry 2 'https://ucbb60d06a77fbff17e6e4444c77.dl.dropboxusercontent.com/cd/0/get/DJhermA8X1UpR0l8QpXEf1qJFQuRmw_iH6s82wdBeY50XK--SMOIcGBS1QJk3BbCs7bpffn91WoZkfrqEbrF2OAxkNCa1MNMEoFcSli-OESbEPbS0X6d3TZtDD-JKCTRsmUsnFepEyDtIpEhUwrgwL3QVkPxpzfrLWwVzWI9bb-9AQ/file?c_luid=3565984f' -o 20261007-youth-future-savings-apply-v3/02-schedule.png
+          curl -L --fail --retry 2 'https://ucc88ea30bf9046609aada4acd96.dl.dropboxusercontent.com/cd/0/get/DJhzCLwRoyKH67Z0xm4rIMhmlzql-vdI9kBhKmRa8t7JKUMFADj8Oj2hSRvyLoQyposThZLBTnRXjNekui5xT8bC5ikZWrjcjM0yoweA09zyNqTQk0La9I6Qo1teZr_RLBfu_o_rnr3pnoQPZhac4vlyt2sCyFwF7f1ZmsNyjTr2nA/file?c_luid=3565984f' -o 20261007-youth-future-savings-apply-v3/03-eligibility.png
+          curl -L --fail --retry 2 'https://uce46f498b6d9aed9e0f23993b88.dl.dropboxusercontent.com/cd/0/get/DJjLKhDszmsh-WskU2OtMedM8M1_wuFvDlKgcH8mtKgOA_ZCoAjrfjJVQvRtqSIyhj18nJfYO3gKmuVQifLGUru5cd0LmQ0P-wxz7rw0TJQyHsmnY35pXU9XTS128KfEZlsKTALgYtsMnbhobEXyLXiXGbxZcl5CUsmZT_J4111DhA/file?c_luid=3565984f' -o 20261007-youth-future-savings-apply-v3/04-process.png
+          curl -L --fail --retry 2 'https://ucc202c56255a8b39da2babb5223.dl.dropboxusercontent.com/cd/0/get/DJgMFx95dHz72whudjQlpecadS7Lclug5u-6b75CVHlRmsGNNdUzEjQk5P4ghvjWw8pxhra-dzkJ9cKnoZBdBcjFHrpGfRTOVSZvvH6SwWXcbXogaJ_kRuQwmDXDf_qd4MwVXQMgxtfFo8iz3mj9yaBWWnnb3HRQQ1ai3zuwDvV1yA/file?c_luid=3565984f' -o 20261007-youth-future-savings-apply-v3/05-checklist.png
+      - name: Commit imported assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 20261007-youth-future-savings-apply-v3/*.png
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Add youth future savings apply v3 assets"
+            git push
+          fi
