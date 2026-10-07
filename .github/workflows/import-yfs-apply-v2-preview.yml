@@ -1,0 +1,31 @@
+name: Import youth future savings preview asset
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-yfs-apply-v2-preview.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import-asset:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download preview image
+        run: |
+          mkdir -p 20261007-youth-future-savings-apply-v2
+          curl -L --fail --retry 2 'https://uc33284706be941bf188ea314d6e.dl.dropboxusercontent.com/cd/0/get/DJireSAqp8PTx-bRo9prF5e7ReDelc69zYC6pXXUuUJtvwIyxKGag9OD0-Hql1J4wGlgs2nqcKgNmGVfxJsBYen7ZCd-j7ZP2-oYWMyFZxoREfWE29xj3IP1RMpp_mOjdPWU6DbQuXDhM2vZT3GBRnHmGbJoHRCbygZxB9_uIEhuvg/file?c_luid=3565984f' -o 20261007-youth-future-savings-apply-v2/01-cover.png
+      - name: Commit image
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 20261007-youth-future-savings-apply-v2/01-cover.png
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Add youth future savings application preview cover"
+            git push
+          fi
