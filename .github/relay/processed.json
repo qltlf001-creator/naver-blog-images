@@ -46,6 +46,7 @@
     ".github/relay/queue/20261006-occupational-pension-basic-pension-home-v1.payload",
     ".github/relay/queue/20261007-youth-future-savings-v1.payload",
     ".github/relay/queue/20261007-implant-insurance-v1.payload",
-    ".github/relay/queue/20261007-youth-future-savings-v4.payload"
+    ".github/relay/queue/20261007-youth-future-savings-v4.payload",
+    ".github/relay/queue/issue-5.payload"
   ]
 }
