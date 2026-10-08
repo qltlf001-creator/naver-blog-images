@@ -1,0 +1,18 @@
+{
+  "slug": "20261008-health-insurance-nov-settlement-v1",
+  "date": "2026-10-08",
+  "mode": "HOME_FIRST",
+  "title": "작년에 건강보험료 줄여냈다면 11월 다시 계산됩니다, 추가납부·환급 갈리는 이유",
+  "dropbox_assets": [
+    "/naver-blog-images/20261008-health-insurance-nov-settlement-v1-01-cover.png",
+    "/naver-blog-images/20261008-health-insurance-nov-settlement-v1-02-timeline.png",
+    "/naver-blog-images/20261008-health-insurance-nov-settlement-v1-03-additional-vs-refund.png",
+    "/naver-blog-images/20261008-health-insurance-nov-settlement-v1-04-adjustment-vs-annual.png"
+  ],
+  "official_sources": [
+    "https://www.nhis.or.kr/nhis/index.do",
+    "https://www.law.go.kr/LSW/lsLinkCommonInfo.do?lspttninfSeq=69493",
+    "https://www.nhis.or.kr/renewal_popup/poster/20230125_poster_longdesc_1.html"
+  ],
+  "status": "READY_FOR_SMARTEDITOR"
+}
