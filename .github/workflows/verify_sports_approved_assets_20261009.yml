@@ -1,0 +1,55 @@
+name: Verify user-approved sports PNG assets (2026-10-09)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "sports/2026-10-09/*.png"
+      - "sports/2026-10-09/asset_manifest_APPROVED.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-original-bytes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify nine approved original images against manifest
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import json
+          import sys
+
+          folder = Path("sports/2026-10-09")
+          doc = json.loads((folder / "asset_manifest_APPROVED.json").read_text(encoding="utf-8"))
+          files = doc.get("assets", [])
+          if len(files) != 9:
+              raise SystemExit(f"FAIL: Expected 9 approved images, found {len(files)} manifest entries")
+          names = set()
+          for record in files:
+              name = record["filename"]
+              if name in names or "/" in name or not name.endswith(".png"):
+                  raise SystemExit(f"FAIL: Duplicate or invalid name: {name!r}")
+              names.add(name)
+              path = folder / name
+              if not path.is_file():
+                  raise SystemExit(f"FAIL: Missing GitHub image: {path}")
+              data = path.read_bytes()
+              expected_bytes = int(record["bytes"])
+              expected_sha = record["sha256"].lower()
+              actual_sha = hashlib.sha256(data).hexdigest()
+              if len(data) != expected_bytes or actual_sha != expected_sha:
+                  raise SystemExit(f"FAIL: Approved original mismatch: {path}")
+              if not data.startswith(b"\x89PNG\r\n\x1a\n"):
+                  raise SystemExit(f"FAIL: Not a PNG: {path}")
+              print(f"PASS {name}: {len(data)} bytes, SHA-256 {actual_sha}")
+          print("VERIFIED: All nine GitHub file bytes match approved originals.")
+          PY
