@@ -1,0 +1,100 @@
+{
+  "approved_at": "2026-10-09",
+  "source": "Conversation user approval; exact original PNG bytes verified locally",
+  "repository": "qltlf001-creator/naver-blog-images",
+  "branch": "main",
+  "remote_image_upload": "NOT_EXECUTED",
+  "public_raw_urls": "UNVERIFIED",
+  "assets": [
+    {
+      "filename": "kbo_01_cover.png",
+      "bytes": 126199,
+      "sha256": "1561c42c632a35902e78899dd9d8a6ab35f1297a62fcaef38ecc5856b6df3e2b",
+      "width": 1200,
+      "height": 1200,
+      "status": "APPROVED_LOCAL",
+      "remote_status": "NOT_EXECUTED",
+      "target_path": "sports/2026-10-09/kbo_01_cover.png"
+    },
+    {
+      "filename": "kbo_02_home.png",
+      "bytes": 81192,
+      "sha256": "5e879a9c18c17aa3354491dd0f50c3e9f1334a99604548a4a4fdcd9e085813fc",
+      "width": 1200,
+      "height": 850,
+      "status": "APPROVED_LOCAL",
+      "remote_status": "NOT_EXECUTED",
+      "target_path": "sports/2026-10-09/kbo_02_home.png"
+    },
+    {
+      "filename": "kbo_03_bracket.png",
+      "bytes": 91477,
+      "sha256": "b6db3f7db1a712e42a61fc4596d5e688d93cce9cba31d7cb858794a720e20e62",
+      "width": 1050,
+      "height": 1280,
+      "status": "APPROVED_LOCAL",
+      "remote_status": "NOT_EXECUTED",
+      "target_path": "sports/2026-10-09/kbo_03_bracket.png"
+    },
+    {
+      "filename": "dodgers_01_cover.png",
+      "bytes": 110651,
+      "sha256": "fba54422db39aa92a0ec844da6017cbfa6a1249a0e386807f1848a3860d8e167",
+      "width": 1200,
+      "height": 1200,
+      "status": "APPROVED_LOCAL",
+      "remote_status": "NOT_EXECUTED",
+      "target_path": "sports/2026-10-09/dodgers_01_cover.png"
+    },
+    {
+      "filename": "dodgers_02_7th.png",
+      "bytes": 73506,
+      "sha256": "e8d27f1bce09626e07d967bd5b1135e95da63b2fc1007f1b181caad168a7665d",
+      "width": 1200,
+      "height": 800,
+      "status": "APPROVED_LOCAL",
+      "remote_status": "NOT_EXECUTED",
+      "target_path": "sports/2026-10-09/dodgers_02_7th.png"
+    },
+    {
+      "filename": "dodgers_03_next.png",
+      "bytes": 76713,
+      "sha256": "84ad6ad49b07bf165a99a1f970a60ba1e6d465a76be0e57dd54289531f216f96",
+      "width": 1200,
+      "height": 800,
+      "status": "APPROVED_LOCAL",
+      "remote_status": "NOT_EXECUTED",
+      "target_path": "sports/2026-10-09/dodgers_03_next.png"
+    },
+    {
+      "filename": "golf_01_cover.png",
+      "bytes": 108062,
+      "sha256": "9502b2ae0e42815c062107eb4c6561473f9ef103b3245c73d03f8fe39bb0bf43",
+      "width": 1200,
+      "height": 1200,
+      "status": "APPROVED_LOCAL",
+      "remote_status": "NOT_EXECUTED",
+      "target_path": "sports/2026-10-09/golf_01_cover.png"
+    },
+    {
+      "filename": "golf_02_scoring.png",
+      "bytes": 62150,
+      "sha256": "c19c0a9815ca5c8cbe0da89c92cdb21f5e8b478b8f1f81614d27d742ee929a5a",
+      "width": 1200,
+      "height": 890,
+      "status": "APPROVED_LOCAL",
+      "remote_status": "NOT_EXECUTED",
+      "target_path": "sports/2026-10-09/golf_02_scoring.png"
+    },
+    {
+      "filename": "golf_03_15points.png",
+      "bytes": 83483,
+      "sha256": "374c723449a04bb8eefd1105fd40ed86a00e4926e95b8636646cda01ebaca5c9",
+      "width": 1200,
+      "height": 820,
+      "status": "APPROVED_LOCAL",
+      "remote_status": "NOT_EXECUTED",
+      "target_path": "sports/2026-10-09/golf_03_15points.png"
+    }
+  ]
+}
