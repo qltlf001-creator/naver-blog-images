@@ -1,26 +1,32 @@
-# 스포츠 블로그 이미지 세트 — 승인 대기
+# 스포츠 블로그 3편 — 이미지 승인 기록
 
-작성일: 2026-10-09
-상태: AWAITING_APPROVAL
-이미지: 9개 PNG (각 원고 3장)
-대상: KBO 와일드카드 / LA 다저스 NLDS / 김민솔 KLPGA 1R
+- 기준일: 2026-10-09
+- 승인 상태: **APPROVED** (원본 PNG 9개, KBO / 다저스 / 김민솔 각 3장)
+- 로컬 검증: 9/9 SHA-256 및 바이트 길이 일치
+- 본문 3개 및 이미지 배치표: 로컬 발행 패키지 작성 완료
+- 원격 GitHub 이미지 업로드: **NOT_EXECUTED / UNVERIFIED**
+- GitHub 공개 이미지 URL: **UNVERIFIED**
+- 네이버 SmartEditor 직접 업로드: **USER_ACTION_REQUIRED**
 
-> 주의: 이 저장소 경로에는 아직 이미지 원본이 업로드되지 않았습니다.
-> 사용자가 최종 시안을 승인한 다음, 원본 바이트 그대로 업로드·크기·해시 및 raw URL을 검증합니다.
-> AI 또는 제작 그래픽을 실제 보도사진처럼 제공하지 않습니다.
+## 승인 이미지 목록
 
-## 예정 파일
+**KBO**
+1. `kbo_01_cover.png` — 와일드카드 4·5위 조건
+2. `kbo_02_home.png` — 홈구장 조건
+3. `kbo_03_bracket.png` — 포스트시즌 라운드
 
-- `kbo_01_cover.png` — 4위와 5위의 진출 조건
-- `kbo_02_home.png` — 와일드카드 4위 팀 홈구장 규정
-- `kbo_03_bracket.png` — 라운드별 승리 조건
-- `dodgers_01_cover.png` — 7회 2타점 적시타
-- `dodgers_02_7th.png` — 7회 동점에서 3:1로 변한 흐름
-- `dodgers_03_next.png` — 다음 상대 밀워키
-- `golf_01_cover.png` — 김민솔 8버디, 15점, 공동 3위
-- `golf_02_scoring.png` — 변형 스테이블포드 배점
-- `golf_03_15points.png` — 8×2-1=15 계산
+**다저스**
+1. `dodgers_01_cover.png` — 7회 2타점 안타
+2. `dodgers_02_7th.png` — 승부 흐름
+3. `dodgers_03_next.png` — 다음 상대 밀워키
 
-검증 자료: [KBO](https://www.koreabaseball.com/MediaNews/Notice/View.aspx?bdSe=12183) · [MLB](https://www.mlb.com/dodgers/video/andy-pages-two-run-single-x8253) · [KLPGA](https://193.klpga.co.kr/web/media/newsDetail?sn=131907)
+**김민솔**
+1. `golf_01_cover.png` — 버디 8개 / 15점
+2. `golf_02_scoring.png` — 점수제
+3. `golf_03_15points.png` — 계산 구조
 
-후속 작업: 승인 → PNG 업로드(main) → blob/bytes/hash 대조 → 공개 raw HTTPS 확인 → HTML 미리보기 이미지 반영.
+자세한 바이트 크기·원본 SHA-256·예정 GitHub 경로는 [승인 매니페스트](./asset_manifest_APPROVED.json)를 확인하세요.
+
+원본 PNG가 실제 `main` 브랜치에 업로드된 뒤, 원격 SHA-256 및 반환된 공개 HTTPS raw 주소를 대조해야만 업로드 완료로 변경합니다. 이 README와 매니페스트 등록은 이미지 자체가 업로드되었다는 의미가 아닙니다.
+
+이미지는 실제 경기 사진을 대체하는 증거가 아닌 블로그용 제작 그래픽입니다.
