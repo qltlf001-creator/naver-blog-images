@@ -3,8 +3,8 @@
   "source": "Conversation user approval; exact original PNG bytes verified locally",
   "repository": "qltlf001-creator/naver-blog-images",
   "branch": "main",
-  "remote_image_upload": "NOT_EXECUTED",
-  "public_raw_urls": "UNVERIFIED",
+  "remote_image_upload": "VERIFIED_ALL_9_FILES_MAIN",
+  "public_raw_urls": "VERIFIED_ALL_9_BY_GITHUB_RAW_BINARY_FETCH",
   "assets": [
     {
       "filename": "kbo_01_cover.png",
@@ -13,8 +13,10 @@
       "width": 1200,
       "height": 1200,
       "status": "APPROVED_LOCAL",
-      "remote_status": "NOT_EXECUTED",
-      "target_path": "sports/2026-10-09/kbo_01_cover.png"
+      "remote_status": "VERIFIED",
+      "target_path": "sports/2026-10-09/kbo_01_cover.png",
+      "github_blob_sha": "78cf6fb7d43197d84abd74421d97be2297c956d7",
+      "public_raw_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/sports/2026-10-09/kbo_01_cover.png"
     },
     {
       "filename": "kbo_02_home.png",
@@ -23,8 +25,10 @@
       "width": 1200,
       "height": 850,
       "status": "APPROVED_LOCAL",
-      "remote_status": "NOT_EXECUTED",
-      "target_path": "sports/2026-10-09/kbo_02_home.png"
+      "remote_status": "VERIFIED",
+      "target_path": "sports/2026-10-09/kbo_02_home.png",
+      "github_blob_sha": "20837020ea165d35d95f6e787fdd41d63d72a324",
+      "public_raw_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/sports/2026-10-09/kbo_02_home.png"
     },
     {
       "filename": "kbo_03_bracket.png",
@@ -33,8 +37,10 @@
       "width": 1050,
       "height": 1280,
       "status": "APPROVED_LOCAL",
-      "remote_status": "NOT_EXECUTED",
-      "target_path": "sports/2026-10-09/kbo_03_bracket.png"
+      "remote_status": "VERIFIED",
+      "target_path": "sports/2026-10-09/kbo_03_bracket.png",
+      "github_blob_sha": "d6b57d2dfecc5c53b788c58747857aef73edde5c",
+      "public_raw_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/sports/2026-10-09/kbo_03_bracket.png"
     },
     {
       "filename": "dodgers_01_cover.png",
@@ -43,8 +49,10 @@
       "width": 1200,
       "height": 1200,
       "status": "APPROVED_LOCAL",
-      "remote_status": "NOT_EXECUTED",
-      "target_path": "sports/2026-10-09/dodgers_01_cover.png"
+      "remote_status": "VERIFIED",
+      "target_path": "sports/2026-10-09/dodgers_01_cover.png",
+      "github_blob_sha": "0e00052dcc185285037804ab97154f056347fda6",
+      "public_raw_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/sports/2026-10-09/dodgers_01_cover.png"
     },
     {
       "filename": "dodgers_02_7th.png",
@@ -53,8 +61,10 @@
       "width": 1200,
       "height": 800,
       "status": "APPROVED_LOCAL",
-      "remote_status": "NOT_EXECUTED",
-      "target_path": "sports/2026-10-09/dodgers_02_7th.png"
+      "remote_status": "VERIFIED",
+      "target_path": "sports/2026-10-09/dodgers_02_7th.png",
+      "github_blob_sha": "52b85ffe4e6ca9eec10f92527b036d7836e5eb84",
+      "public_raw_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/sports/2026-10-09/dodgers_02_7th.png"
     },
     {
       "filename": "dodgers_03_next.png",
@@ -63,8 +73,10 @@
       "width": 1200,
       "height": 800,
       "status": "APPROVED_LOCAL",
-      "remote_status": "NOT_EXECUTED",
-      "target_path": "sports/2026-10-09/dodgers_03_next.png"
+      "remote_status": "VERIFIED",
+      "target_path": "sports/2026-10-09/dodgers_03_next.png",
+      "github_blob_sha": "dbd689db219035fba34fc4a6a4c2c0bdca50bd3a",
+      "public_raw_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/sports/2026-10-09/dodgers_03_next.png"
     },
     {
       "filename": "golf_01_cover.png",
@@ -73,8 +85,10 @@
       "width": 1200,
       "height": 1200,
       "status": "APPROVED_LOCAL",
-      "remote_status": "NOT_EXECUTED",
-      "target_path": "sports/2026-10-09/golf_01_cover.png"
+      "remote_status": "VERIFIED",
+      "target_path": "sports/2026-10-09/golf_01_cover.png",
+      "github_blob_sha": "731317e12a31671e2f802bd423cc1eed4d0930d1",
+      "public_raw_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/sports/2026-10-09/golf_01_cover.png"
     },
     {
       "filename": "golf_02_scoring.png",
@@ -83,8 +97,10 @@
       "width": 1200,
       "height": 890,
       "status": "APPROVED_LOCAL",
-      "remote_status": "NOT_EXECUTED",
-      "target_path": "sports/2026-10-09/golf_02_scoring.png"
+      "remote_status": "VERIFIED",
+      "target_path": "sports/2026-10-09/golf_02_scoring.png",
+      "github_blob_sha": "05e0497eb87b9a58eb42af3e509647a013e86afe",
+      "public_raw_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/sports/2026-10-09/golf_02_scoring.png"
     },
     {
       "filename": "golf_03_15points.png",
@@ -93,8 +109,11 @@
       "width": 1200,
       "height": 820,
       "status": "APPROVED_LOCAL",
-      "remote_status": "NOT_EXECUTED",
-      "target_path": "sports/2026-10-09/golf_03_15points.png"
+      "remote_status": "VERIFIED",
+      "target_path": "sports/2026-10-09/golf_03_15points.png",
+      "github_blob_sha": "3af0bdf72efba728f093a561b5e2a06e7dbfc704",
+      "public_raw_url": "https://raw.githubusercontent.com/qltlf001-creator/naver-blog-images/main/sports/2026-10-09/golf_03_15points.png"
     }
-  ]
+  ],
+  "github_verified_at": "2026-10-09"
 }
