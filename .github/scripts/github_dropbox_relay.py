@@ -219,7 +219,7 @@ def payload_assets(payload):
     token = payload['directory_token']
     require(isinstance(token, str) and re.fullmatch(r'[A-Za-z0-9._-]+', token) and token not in {'.', '..'}, 'invalid directory_token')
     assets = payload['assets']
-    require(isinstance(assets, list) and len(assets) in (4, 5), 'four or five assets required')
+    require(isinstance(assets, list) and len(assets) in (3, 4, 5), 'three, four or five assets required')
     seen = set()
     for index, item in enumerate(assets, 1):
         require(isinstance(item, dict), f'asset {index}: object required')
