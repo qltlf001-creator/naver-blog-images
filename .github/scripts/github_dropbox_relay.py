@@ -219,7 +219,7 @@ def payload_assets(payload):
     token = payload['directory_token']
     require(isinstance(token, str) and re.fullmatch(r'[A-Za-z0-9._-]+', token) and token not in {'.', '..'}, 'invalid directory_token')
     assets = payload['assets']
-    require(isinstance(assets, list) and len(assets) == 5, 'exactly five assets required')
+    require(isinstance(assets, list) and len(assets) in (4, 5), 'four or five assets required')
     seen = set()
     for index, item in enumerate(assets, 1):
         require(isinstance(item, dict), f'asset {index}: object required')
@@ -318,7 +318,7 @@ def main():
         update_bootstrap(config, private_key)
         commit_paths.append(BOOTSTRAP)
 
-    result = commit_push(commit_paths, 'Publish five verified Naver blog assets')
+    result = commit_push(commit_paths, f'Publish {len(verified)} verified Naver blog assets')
     print(f'RELAY_COMMIT={result}')
 
     records = [fetch_main_metadata(item, data) for item, data in verified]
@@ -330,7 +330,7 @@ def main():
         'assets': records,
     }
     RECEIPT.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print('GITHUB_MAIN_METADATA_COUNT=5')
+    print(f'GITHUB_MAIN_METADATA_COUNT={len(records)}')
 
 
 if __name__ == '__main__':
