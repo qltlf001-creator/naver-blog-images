@@ -2,6 +2,10 @@
   "schema": "NAVER_RELAY_BOOTSTRAP_V1",
   "key_artifacts": [
     {
+      "run_id": 38204006182,
+      "name": "relay-key-bundle"
+    },
+    {
       "run_id": 38192100488,
       "name": "relay-key-bundle"
     },
@@ -11,10 +15,6 @@
     },
     {
       "run_id": 38156015841,
-      "name": "relay-key-bundle"
-    },
-    {
-      "run_id": 38155858116,
       "name": "relay-key-bundle"
     }
   ]
