@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-labelledby="title desc">
+<title id="title">2026 전기요금 복지할인 한눈에 보기</title><desc id="desc">정부24 2026년 8월 14일 수정 안내 기준의 대상별 전기요금 복지할인 한도와 신청 경로를 정리한 자체 제작 인포그래픽입니다.</desc>
+<defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#edf5ff"/><stop offset="1" stop-color="#f8fbff"/></linearGradient><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#12325b" flood-opacity=".10"/></filter></defs>
+<rect width="1080" height="1350" fill="url(#bg)"/>
+<circle cx="1000" cy="95" r="135" fill="#dcecff"/><circle cx="45" cy="1100" r="160" fill="#e1f5ee"/>
+<g font-family="Arial,'Noto Sans KR',sans-serif" fill="#18324d">
+<text x="72" y="100" font-size="24" font-weight="700" fill="#2871c8">2026 생활요금 안내</text>
+<text x="72" y="170" font-size="54" font-weight="800">전기요금 복지할인</text>
+<text x="72" y="220" font-size="26" fill="#536b82">대상별 할인 한도와 신청 경로</text>
+<rect x="72" y="260" width="936" height="110" rx="24" fill="#173e67"/>
+<text x="108" y="306" font-size="22" fill="#cfe6ff">한눈에 보는 핵심</text><text x="108" y="344" font-size="27" font-weight="700" fill="#fff">자격에 따라 정액 한도 또는 전기요금의 30% 할인</text>
+<text x="72" y="430" font-size="30" font-weight="800">누가 얼마나 할인받나요?</text>
+<g filter="url(#shadow)">
+<rect x="72" y="462" width="450" height="195" rx="22" fill="#fff"/><rect x="558" y="462" width="450" height="195" rx="22" fill="#fff"/>
+<rect x="72" y="681" width="450" height="195" rx="22" fill="#fff"/><rect x="558" y="681" width="450" height="195" rx="22" fill="#fff"/>
+</g>
+<g>
+<rect x="98" y="487" width="10" height="140" rx="5" fill="#2871c8"/><text x="132" y="516" font-size="23" font-weight="700">생계·의료급여 수급자</text><text x="132" y="565" font-size="30" font-weight="800" fill="#145da8">월 최대 16,000원</text><text x="132" y="605" font-size="20" fill="#536b82">여름철 최대 20,000원</text>
+<rect x="584" y="487" width="10" height="140" rx="5" fill="#20a17a"/><text x="618" y="516" font-size="23" font-weight="700">주거·교육급여 수급자</text><text x="618" y="565" font-size="30" font-weight="800" fill="#147b5c">월 최대 10,000원</text><text x="618" y="605" font-size="20" fill="#536b82">여름철 최대 12,000원</text>
+<rect x="98" y="706" width="10" height="140" rx="5" fill="#f0a429"/><text x="132" y="735" font-size="23" font-weight="700">해당 차상위계층</text><text x="132" y="784" font-size="30" font-weight="800" fill="#a86600">월 최대 8,000원</text><text x="132" y="824" font-size="20" fill="#536b82">여름철 최대 10,000원</text>
+<rect x="584" y="706" width="10" height="140" rx="5" fill="#8464c7"/><text x="618" y="735" font-size="23" font-weight="700">다자녀·대가족·출산 가구</text><text x="618" y="784" font-size="30" font-weight="800" fill="#6746aa">전기요금의 30%</text><text x="618" y="824" font-size="20" fill="#536b82">월 최대 16,000원</text>
+</g>
+<text x="72" y="934" font-size="30" font-weight="800">신청은 이렇게</text>
+<rect x="72" y="966" width="936" height="170" rx="24" fill="#fff" filter="url(#shadow)"/>
+<g font-size="23" font-weight="700"><circle cx="132" cy="1022" r="25" fill="#2871c8"/><text x="124" y="1030" fill="#fff">1</text><text x="176" y="1030">한전ON 온라인 신청</text><circle cx="132" cy="1080" r="25" fill="#20a17a"/><text x="124" y="1088" fill="#fff">2</text><text x="176" y="1088">행정복지센터·한전 사업소 방문</text><circle cx="622" cy="1022" r="25" fill="#f0a429"/><text x="614" y="1030" fill="#fff">3</text><text x="666" y="1030">우편·팩스 신청</text><circle cx="622" cy="1080" r="25" fill="#8464c7"/><text x="614" y="1088" fill="#fff">4</text><text x="666" y="1088">한전 고객센터 123</text></g>
+<rect x="72" y="1170" width="936" height="92" rx="20" fill="#e8f1fb"/>
+<text x="100" y="1208" font-size="20" font-weight="700" fill="#244d75">신청 전 확인하세요</text><text x="100" y="1240" font-size="18" fill="#425c73">급여 종류·자격 세부조건·증빙서류에 따라 적용이 달라질 수 있습니다.</text>
+<text x="72" y="1304" font-size="16" fill="#536b82">출처: 정부24 ‘전기 요금 복지할인’ (2026.08.14 수정 안내) · 내용 확인일 2026.11.06</text>
+<text x="72" y="1330" font-size="15" fill="#718398">자체 제작 인포그래픽 · 실제 사진 및 정부 공식 화면 캡처가 아닙니다</text>
+</g></svg>
