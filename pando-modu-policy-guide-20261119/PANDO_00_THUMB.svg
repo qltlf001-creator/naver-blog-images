@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200"><defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#061D19"/><stop offset=".50" stop-color="#134B41"/><stop offset="1" stop-color="#10252D"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF0AB"/><stop offset=".55" stop-color="#E4B96C"/><stop offset="1" stop-color="#A47C37"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#FFF" stop-opacity=".24"/><stop offset="1" stop-color="#B4F4D8" stop-opacity=".06"/></linearGradient>
+ <linearGradient id="cream" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFDF6"/><stop offset="1" stop-color="#ECF1E7"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#F8E9BA" stop-opacity=".32"/><stop offset="1" stop-color="#F8E9BA" stop-opacity="0"/></radialGradient>
+ <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#051914" flood-opacity=".36"/></filter>
+ </defs>
+ <rect x="0" y="0" width="1600" height="1200" rx="0" fill="url(#bg)" stroke="none" stroke-width="2"/>
+ <circle cx="1360" cy="140" r="510" fill="url(#halo)"/>
+ <path d="M-80 1020 Q350 910 680 1050 T1750 900" stroke="#B6E4D1" stroke-width="2" fill="none" opacity=".20"/>
+ <text x="92" y="132" fill="#E2C887" font-family="Noto Sans KR,Apple SD Gothic Neo,Pretendard,Malgun Gothic,sans-serif" font-size="34" font-weight="800" >PANDO · POLICY GUIDE</text>
+ <text x="90" y="355" fill="#FFF9E4" font-family="Noto Sans KR,Apple SD Gothic Neo,Pretendard,Malgun Gothic,sans-serif" font-size="142" font-weight="850" >모두의 광장</text>
+ <text x="95" y="470" fill="#F4CF7C" font-family="Noto Sans KR,Apple SD Gothic Neo,Pretendard,Malgun Gothic,sans-serif" font-size="69" font-weight="800" >정책제안, 어렵지 않게</text>
+ <text x="95" y="550" fill="#E9F5EA" font-family="Noto Sans KR,Apple SD Gothic Neo,Pretendard,Malgun Gothic,sans-serif" font-size="43" font-weight="650" >회원가입 · AI 작성 · 등록 전 확인</text>
+ <rect x="95" y="625" width="700" height="330" rx="45" fill="url(#glass)" stroke="#9BCBAA" stroke-width="3"/>
+ <text x="145" y="710" fill="#FFFBE7" font-family="Noto Sans KR,Apple SD Gothic Neo,Pretendard,Malgun Gothic,sans-serif" font-size="51" font-weight="750" >내 아이디어를 정책으로</text>
+ <text x="145" y="785" fill="#F3CC7D" font-family="Noto Sans KR,Apple SD Gothic Neo,Pretendard,Malgun Gothic,sans-serif" font-size="69" font-weight="900" >글 · 음성 · 사진</text>
+ <text x="145" y="850" fill="#D7F0DE" font-family="Noto Sans KR,Apple SD Gothic Neo,Pretendard,Malgun Gothic,sans-serif" font-size="34" font-weight="650" >AI가 정리와 유사 제안을 도와요</text>
+ <g filter="url(#shadow)">
+ <rect x="1010" y="335" width="390" height="560" rx="65" fill="#F3F0D7" stroke="#F6D98F" stroke-width="6"/>
+ <rect x="1048" y="435" width="314" height="360" rx="35" fill="#135344" stroke="none" stroke-width="2"/>
+ <text x="1100" y="515" fill="#FFFFFF" font-family="Noto Sans KR,Apple SD Gothic Neo,Pretendard,Malgun Gothic,sans-serif" font-size="66" font-weight="850" >정책</text><text x="1100" y="593" fill="#E2C47B" font-family="Noto Sans KR,Apple SD Gothic Neo,Pretendard,Malgun Gothic,sans-serif" font-size="66" font-weight="850" >제안</text>
+ <path d="M1122 675h158M1122 708h120" stroke="#DAF7E7" stroke-width="16" stroke-linecap="round"/>
+ <circle cx="1298" cy="265" r="105" fill="#E8C67B"/><path d="M1298 218v98 M1248 267h100" stroke="#174E3C" stroke-width="17" stroke-linecap="round"/>
+ </g>
+ <text x="90" y="1100" fill="#A6C8B7" font-family="Noto Sans KR,Apple SD Gothic Neo,Pretendard,Malgun Gothic,sans-serif" font-size="26" font-weight="500" >※ 안내용 제작 그래픽 · 공식 사이트 화면이 아닙니다.</text></svg>
