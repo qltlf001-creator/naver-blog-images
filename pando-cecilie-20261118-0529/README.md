@@ -1,0 +1,3 @@
+# PANDO · Cecilie Bahnsen 2026 FW
+
+Created 2026-11-18. This folder contains AI-generated editorial illustrations, not official UNIQLO product photographs. First thumbnail and closing summary only. Verified facts: launch scheduled 2026-11-20 09:15 KST; women's fleece jacket KRW 59,900; boa fleece cropped vest KRW 49,900; purchase limit 2 per product per person. Sources: https://www.uniqlo.com/kr/ko/women/special-collaboration/uniqlo-and-cecilie-bahnsen and https://faq-kr.uniqlo.com/pkb_Home_UQ_KR?id=kA0fR0000001gA5 . External official product photos remain on original servers, not reuploaded. PNG originals are preserved; JPEG display copies retain original pixel dimensions.
